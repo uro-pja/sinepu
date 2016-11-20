@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block page_title %}Lista podan{% endblock %}
+
+{% block body %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Typ Podania</th>
+                <th>Data zlozenia podania</th>
+                <th>Data ostatniej aktualizacji</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Usuniencie konta</td>
+                <td>21:37 10.10.1999</td>
+                <td>21:37 10.10.1999</td>
+                <td>Oczekuje na wpierdol</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

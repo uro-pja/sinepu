@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+    <h1>Kreator Podania</h1>
+
+    <form>
+        <div class="form-group">
+            <label for="exampleSelect2">Typ Podania</label>
+            <select class="form-control" id="exampleSelect2">
+                <option>O wpierdol</option>
+                <option>O nowy dress</option>
+                <option>O ciasteczka</option>
+            </select>
+        </div>
+        <div class="alert alert-warning">
+            <p>
+                INSTRUKCJA STUDENTA
+---------------------------------------------------
+
+---------------------------------------------------
+            </p>
+
+        </div>
+
+        <div class="form-group">
+            <label for="exampleTextarea">Tresc Podania</label>
+            <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputFile">Zalacz plik</label>
+            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+            <small id="fileHelp" class="form-text text-muted">
+                Tylko tar.gz
+            </small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+{% endblock %}
