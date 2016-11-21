@@ -7,3 +7,11 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    sinepu.tickets.templates_repository:
+        class: Tickets\Infrastructure\Repository\InMemory\TicketTemplatesRepository
+
+    sinepu.tickets.application.query.templates:
+        class: Tickets\Infrastructure\Query\TemplatesQuery
+        arguments:
+          - "@sinepu.tickets.templates_repository"

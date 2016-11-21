@@ -15,13 +15,15 @@
             </tr>
             </thead>
             <tbody>
+            {% for ticket in tickets %}
             <tr>
                 <td>1</td>
-                <td>Usuniencie konta</td>
-                <td>21:37 10.10.1999</td>
-                <td>21:37 10.10.1999</td>
-                <td>Oczekuje na wpierdol</td>
+                <td>{{ ticket.type }}</td>
+                <td>{{ ticket.createdAt|date }}</td>
+                <td>{{ ticket.updatedAt|date }}</td>
+                <td>{{ ticket.status }}</td>
             </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
