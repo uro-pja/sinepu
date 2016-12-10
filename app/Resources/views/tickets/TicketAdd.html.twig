@@ -1,13 +1,12 @@
 {% extends "base.html.twig" %}
 {% block body %}
-
     <h1>Kreator Podania</h1>
 
-    <form>
+    <form method="post" action="{{ path('tickets_insert') }}">
         <div class="form-group">
             <label for="exampleSelect2">Typ Podania</label>
-            <select class="form-control" id="exampleSelect2">
-                <option>O wpierdol</option>
+            <select class="form-control" id="ticket_type" name="ticket_type">
+                <option>O skreslenie</option>
                 <option>O nowy dress</option>
                 <option>O ciasteczka</option>
             </select>
@@ -15,28 +14,30 @@
         <div class="alert alert-warning">
             <p>
                 INSTRUKCJA STUDENTA
----------------------------------------------------
+                ---------------------------------------------------
 
----------------------------------------------------
+                ---------------------------------------------------
             </p>
 
         </div>
 
         <div class="form-group">
             <label for="exampleTextarea">Tresc Podania</label>
-            <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+            <textarea class="form-control" id="exampleTextarea" rows="3" name="ticket_text"></textarea>
         </div>
 
-        <div class="form-group">
-            <label for="exampleInputFile">Zalacz plik</label>
-            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+        <div class="form-group" onload="start()">
+            <label  class="btn btn-info">Zalacz plik</label>
+            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp"
+                   name="ticket_attach">
             <small id="fileHelp" class="form-text text-muted">
                 Tylko tar.gz
             </small>
+
+            <label class="control-label">Select File</label>
+            <input id="input-1a" type="file" class="file" data-show-preview="false">
         </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <input id="input-id" type="file" class="file" data-preview-file-type="text" >
     </form>
-
 
 {% endblock %}

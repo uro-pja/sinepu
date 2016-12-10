@@ -26,7 +26,7 @@ class CreateTicketHandler
      */
     public function handle(CreateTicketCommand $command)
     {
-        $ticket = new Ticket(Uuid::uuid4(), $command->getName());
+        $ticket = new Ticket(Uuid::uuid4(), $command->getName(), $command->getType() , $command->getText());
 
         $this->ticketsRepository->insert($ticket);
     }

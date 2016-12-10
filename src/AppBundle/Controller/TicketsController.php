@@ -7,6 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Tickets\Application\Command\CreateTicketCommand;
+use Tickets\Application\Command\CreateTicketHandler;
 use Tickets\Application\Query\Result\TicketResult;
 
 class TicketsController extends Controller
@@ -78,9 +80,11 @@ class TicketsController extends Controller
     /**
      * @param Request $request
      * @Route("/tickets/{uuid}", name="tickets_view", methods={"GET"})
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewAction(Request $request)
     {
+        return $this->render("tickets/TicketView.html.twig");
         /**
          * R
          */
@@ -89,11 +93,21 @@ class TicketsController extends Controller
     /**
      * @param Request $request
      * @Route("/tickets", name="tickets_insert", methods={"POST"})
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function insertAction(Request $request)
     {
         /**
          * W
          */
+        $name = $request->getClientIp();
+        $ticket_type = $request->query->get("ticket_type");
+        $ticket_text = $request->query->get("ticket_text");
+//        $ticket_attach  = $request->get("ticket_attach");
+
+        $create = new CreateTicketCommand($name, $ticket_text, $ticket_type);
+        new CreateTicketHandler($create);
+
+        return $this->redirect($this->generateUrl("tickets_index"));
     }
 }
