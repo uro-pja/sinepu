@@ -2,58 +2,33 @@
 
 namespace Tickets\Application\Command;
 
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
+
 class CreateTicketCommand
 {
     /**
-     * @var string
+     * @var UuidInterface
      */
-    private $name;
-    /**
-     * @var string
-     */
-    private $text;
+    public $uuid;
+
     /**
      * @var string
      */
-    private $type;
+    public $content;
+
     /**
      * @var string
      */
-    private $file;
+    public $type;
 
     /**
-     * @param string $name
-     * @param string $text
-     * @param string $type
+     * @var array
      */
-    public function __construct($name, $text, $type)
-    {
-        $this->name = $name;
-        $this->text = $text;
-        $this->type = $type;
-    }
+    public $files = [];
 
-    /**
-     * @return mixed
-     */
-    public function getText()
+    public function __construct()
     {
-        return $this->text;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
+        $this->uuid = Uuid::uuid4();
     }
 }

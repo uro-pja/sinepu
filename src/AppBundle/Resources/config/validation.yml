@@ -1,0 +1,8 @@
+Tickets\Application\Command\CreateTicketCommand:
+    properties:
+        content:
+            - Length:
+                min: 2
+                max: 50
+                minMessage: 'Twoje zgloszenie musi miec przynajmniej {{ limit }} znaki'
+                maxMessage: 'Your first name cannot be longer than {{ limit }} characters'

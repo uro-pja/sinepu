@@ -10,14 +10,24 @@ use Ramsey\Uuid\UuidInterface;
 class TicketBuilder
 {
     /**
+     * @var UuidInterface
+     */
+    private $uuid;
+
+    /**
+     * @var string
+     */
+    private $content;
+
+    /**
      * @var string
      */
     private $type;
 
     /**
-     * @var string
+     * @var array
      */
-    private $status;
+    private $files = [];
 
     /**
      * @var DateTimeInterface
@@ -25,14 +35,9 @@ class TicketBuilder
     private $createdAt;
 
     /**
-     * @var DateTimeInterface
+     * @var DateTimeInterface|null
      */
-    private $updatedAt;
-
-    /**
-     * @var UuidInterface
-     */
-    private $uuid;
+    private $updatedAt = null;
 
     /**
      * TicketTemplateBuilder constructor.

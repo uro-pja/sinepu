@@ -2,7 +2,6 @@
 
 namespace Tickets\Application\Command;
 
-use Ramsey\Uuid\Uuid;
 use Tickets\Domain\Ticket;
 use Tickets\Domain\Tickets;
 
@@ -26,7 +25,11 @@ class CreateTicketHandler
      */
     public function handle(CreateTicketCommand $command)
     {
-        $ticket = new Ticket(Uuid::uuid4(), $command->getName(), $command->getType() , $command->getText());
+        $ticket = new Ticket(
+            $command->uuid,
+            $command->content,
+            $command->type
+        );
 
         $this->ticketsRepository->insert($ticket);
     }

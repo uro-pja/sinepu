@@ -14,12 +14,7 @@ class TicketsRepository implements Tickets
      */
     private $tickets = [];
 
-    /**
-     * @param Ticket $ticket
-     *
-     * @return boolean
-     */
-    public function insert(Ticket $ticket)
+    public function insert(Ticket $ticket): bool
     {
         $this->tickets[$ticket->getUuid()->toString()] = $ticket;
 
@@ -33,7 +28,7 @@ class TicketsRepository implements Tickets
      *
      * @throws TicketNotFoundException
      */
-    public function findOneByUuid(Uuid $uuid)
+    public function findOneByUuid(Uuid $uuid): Ticket
     {
         $ticket = $this->tickets[$uuid->toString()];
 
@@ -47,7 +42,7 @@ class TicketsRepository implements Tickets
     /**
      * @return Ticket[]|array
      */
-    public function findAll()
+    public function findAll(): array
     {
         return $this->tickets;
     }
