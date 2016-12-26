@@ -23,3 +23,10 @@ services:
         class: Tickets\Application\Command\CreateTicketHandler
         arguments:
           - '@sinepu.repository.tickets'
+
+    bundle.form.ticket_type:
+        class: AppBundle\Form\TicketType
+        arguments:
+          - '@sinepu.repository.tickets_templates'
+        tags:
+          - {name: form.type}

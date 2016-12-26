@@ -1,0 +1,20 @@
+Tickets\Domain:
+    type: entity
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        uuid:
+            type: string
+            length: 100
+        content:
+            type: text
+        type:
+            type: array
+        files:
+            type: array
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
