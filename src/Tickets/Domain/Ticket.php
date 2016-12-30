@@ -5,48 +5,36 @@ namespace Tickets\Domain;
 use DateTimeInterface;
 use DateTimeImmutable;
 use Ramsey\Uuid\UuidInterface;
-use Doctrine\ORM\Mapping as ORM;
 
-
-/**
- * @ORM\Entity(repositoryClass="TicketRepository")
- * @ORM\Table(name="ticket")
- */
 class Ticket
 {
     /**
      * @var UuidInterface
-     * @ORM\Column(type="string")
      */
     private $uuid;
 
     /**
      * @var string
-     * @ORM\Column(type="text")
      */
     private $content;
 
     /**
      * @var string
-     * @ORM\Column(type="string")
      */
     private $type;
 
     /**
      * @var array
-     * @ORM\Column(type="array")
      */
     private $files = [];
 
     /**
      * @var DateTimeInterface
-     * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
      * @var DateTimeInterface|null
-     * @ORM\Column(type="datetime")
      */
     private $updatedAt = null;
 

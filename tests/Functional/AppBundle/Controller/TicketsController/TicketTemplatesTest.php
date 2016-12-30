@@ -1,25 +1,13 @@
 <?php
 
-namespace Tests\Functional\AppBundle\Controller;
+namespace tests\Functional\AppBundle\Controller\TicketsController;
 
 use Symfony\Component\HttpFoundation\Response;
 use Tests\Functional\Builders\TicketTemplateBuilder;
 use Tests\Functional\FunctionalTestCase;
 
-class TicketsControllerTest extends FunctionalTestCase
+class TicketTemplatesTest extends FunctionalTestCase
 {
-    /**
-     * @test
-     */
-    public function i_can_see_tickets()
-    {
-
-        $crawler = $this->request('GET', '/tickets');
-
-        $this->assertResponseStatus(Response::HTTP_OK);
-        $this->assertResponseIsHtml();
-    }
-
     /**
      * @test
      */

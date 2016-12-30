@@ -1,13 +1,12 @@
-Tickets\Domain:
+Tickets\Domain\Ticket:
     type: entity
     id:
-        id:
-            type: integer
+        uuid:
+            type: uuid
             generator: { strategy: AUTO }
     fields:
         uuid:
-            type: string
-            length: 100
+            type: uuid
         content:
             type: text
         type:
