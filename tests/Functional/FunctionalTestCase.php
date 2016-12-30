@@ -2,6 +2,8 @@
 
 namespace Tests\Functional;
 
+use Doctrine\ORM\Mapping\ClassMetadataFactory;
+use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -25,6 +27,8 @@ class FunctionalTestCase extends WebTestCase
     {
         $this->client = $this->createClient();
         $this->container = $this->client->getContainer();
+
+        $this->setupDatabase();
     }
 
     /**
@@ -87,5 +91,19 @@ class FunctionalTestCase extends WebTestCase
     public function assertResponseIsHtml()
     {
         $this->assertEquals('text/html; charset=UTF-8', $this->response()->headers->get('Content-Type'));
+    }
+
+    private function setupDatabase()
+    {
+        $em = $this->container()->get('doctrine.orm.default_entity_manager');
+        $params = $em->getConnection()->getParams();
+        if (file_exists($params['path'])) {
+            unlink($params['path']);
+        }
+        $schemaTool = new SchemaTool($em);
+        $cmf        = new ClassMetadataFactory();
+        $cmf->setEntityManager($em);
+        $metadata = $cmf->getAllMetadata();
+        $schemaTool->createSchema($metadata);
     }
 }

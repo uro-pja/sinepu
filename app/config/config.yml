@@ -47,6 +47,8 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        types:
+            uuid: Ramsey\Uuid\Doctrine\UuidType
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
@@ -56,8 +58,15 @@ doctrine:
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+        entity_managers:
+            default:
+                mappings:
+                    Domain:
+                        mapping: true
+                        type: yml
+                        prefix: Tickets\Domain
+                        is_bundle: false
+                        dir: '%kernel.root_dir%/../src/Tickets/Infrastructure/Resources/config/doctrine'
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -72,3 +81,9 @@ swiftmailer:
 #    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
 #    firewall_name: main
 #    user_class:
+
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/DoctrineMigrations"
+    namespace: Application\Migrations
+    table_name: migration_versions
+    name: Application Migrations

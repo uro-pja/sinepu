@@ -7,7 +7,7 @@ use Ramsey\Uuid\Uuid;
 use Tickets\Domain\Ticket;
 use Tickets\Domain\Tickets;
 
-class TicketRepository extends EntityRepository implements Tickets
+class TicketsRepository extends EntityRepository implements Tickets
 {
     /**
      * @param Ticket $ticket
@@ -16,8 +16,8 @@ class TicketRepository extends EntityRepository implements Tickets
      */
     public function insert(Ticket $ticket)
     {
-        $this->_em->persist($ticket);
-        $this->_em->flush();
+        $this->getEntityManager()->persist($ticket);
+        $this->getEntityManager()->flush();
 
         return true;
     }

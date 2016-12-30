@@ -68,7 +68,10 @@ class Ticket
         return $this->createdAt;
     }
 
-    public function getUpdatedAt(): DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getUpdatedAt()
     {
         return $this->updatedAt;
     }

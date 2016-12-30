@@ -35,7 +35,7 @@ class TicketResult
      * @param DateTimeInterface $createdAt
      * @param DateTimeInterface $updatedAt
      */
-    public function __construct($type, $status, DateTimeInterface $createdAt, DateTimeInterface $updatedAt)
+    public function __construct($type, $status, DateTimeInterface $createdAt, DateTimeInterface $updatedAt = null)
     {
         $this->type = $type;
         $this->status = $status;

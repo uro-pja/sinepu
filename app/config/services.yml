@@ -7,7 +7,10 @@ services:
         class: Tickets\Infrastructure\Repository\InMemory\TicketTemplatesRepository
 
     sinepu.repository.tickets:
-        class: Tickets\Infrastructure\Repository\InMemory\TicketsRepository
+        class: Tickets\Infrastructure\Repository\Doctrine\TicketsRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+            - 'Tickets\Domain\Ticket'
 
     sinepu.query.ticket_templates:
         class: Tickets\Infrastructure\Query\TemplatesQuery
