@@ -9,20 +9,20 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Tickets\Application\Command\CreateTicketCommand;
-use Tickets\Infrastructure\Repository\InMemory\TicketTemplatesRepository;
+use Tickets\Infrastructure\Repository\Doctrine\TicketsTemplatesRepository;
 
 class TicketType extends AbstractType
 {
     /**
-     * @var TicketTemplatesRepository
+     * @var TicketsTemplatesRepository
      */
     private $templatesRepository;
 
     /**
      * TicketType constructor.
-     * @param TicketTemplatesRepository $templatesRepository
+     * @param TicketsTemplatesRepository $templatesRepository
      */
-    public function __construct(TicketTemplatesRepository $templatesRepository)
+    public function __construct(TicketsTemplatesRepository $templatesRepository)
     {
         $this->templatesRepository = $templatesRepository;
     }

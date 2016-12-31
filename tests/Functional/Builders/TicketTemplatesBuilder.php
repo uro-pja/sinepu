@@ -4,10 +4,10 @@ namespace Tests\Functional\Builders;
 
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
-use Tickets\Domain\TicketTemplate;
-use Tickets\Domain\TicketTemplates;
+use Tickets\Domain\TicketsTemplate;
+use Tickets\Domain\TicketsTemplates;
 
-class TicketTemplateBuilder
+class TicketTemplatesBuilder
 {
     /**
      * @var UuidInterface
@@ -46,7 +46,7 @@ class TicketTemplateBuilder
     }
 
     /**
-     * @return self
+     * @return TicketTemplatesBuilder
      */
     public static function create()
     {
@@ -56,7 +56,7 @@ class TicketTemplateBuilder
     /**
      * @param UuidInterface $uuid
      *
-     * @return self
+     * @return TicketTemplatesBuilder
      */
     public function withUuid(UuidInterface $uuid)
     {
@@ -69,7 +69,7 @@ class TicketTemplateBuilder
     /**
      * @param string $data
      *
-     * @return self
+     * @return TicketTemplatesBuilder
      */
     public function withName($data)
     {
@@ -82,7 +82,7 @@ class TicketTemplateBuilder
     /**
      * @param string $data
      *
-     * @return self
+     * @return TicketTemplatesBuilder
      */
     public function withContent($data)
     {
@@ -95,7 +95,7 @@ class TicketTemplateBuilder
     /**
      * @param string $data
      *
-     * @return self
+     * @return TicketTemplatesBuilder
      */
     public function withAnnotations($data)
     {
@@ -106,11 +106,11 @@ class TicketTemplateBuilder
     }
 
     /**
-     * @param TicketTemplates $ticketTemplates
+     * @param TicketsTemplates $ticketTemplates
      */
-    public function persist(TicketTemplates $ticketTemplates)
+    public function persist(TicketsTemplates $ticketTemplates)
     {
-        $ticket = new TicketTemplate(
+        $ticket = new TicketsTemplate(
             $this->uuid,
             $this->name,
             $this->content,

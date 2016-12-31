@@ -1,7 +1,7 @@
-Tickets\Domain\TicketTemplate:
+Tickets\Domain\TicketsTemplate:
     type: entity
-    table: TicketTemplate
-    repositoryClass: Tickets\Infrastructure\Repository\Doctrine\TicketTemplateRepository
+    table: TicketsTemplate
+    repositoryClass: Tickets\Infrastructure\Repository\Doctrine\TicketsTemplatesRepository
     id:
         uuid:
             type: uuid

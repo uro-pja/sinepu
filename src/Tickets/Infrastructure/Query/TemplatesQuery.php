@@ -4,21 +4,21 @@ namespace Tickets\Infrastructure\Query;
 
 use Tickets\Application\Query\Result\TemplateResult;
 use Tickets\Application\Query\Templates;
-use Tickets\Domain\TicketTemplates;
+use Tickets\Domain\TicketsTemplates;
 
 class TemplatesQuery implements Templates
 {
     /**
-     * @var TicketTemplates
+     * @var TicketsTemplates
      */
     private $ticketTemplates;
 
     /**
      * TemplatesQuery constructor.
      *
-     * @param TicketTemplates $ticketTemplates
+     * @param TicketsTemplates $ticketTemplates
      */
-    public function __construct(TicketTemplates $ticketTemplates)
+    public function __construct(TicketsTemplates $ticketTemplates)
     {
         $this->ticketTemplates = $ticketTemplates;
     }

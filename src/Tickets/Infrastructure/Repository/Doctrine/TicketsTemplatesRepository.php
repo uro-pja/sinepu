@@ -10,19 +10,19 @@ namespace Tickets\Infrastructure\Repository\Doctrine;
 
 
 use Doctrine\ORM\EntityRepository;
-use Tickets\Domain\TicketTemplate;
-use Tickets\Domain\TicketTemplates;
+use Tickets\Domain\TicketsTemplate;
+use Tickets\Domain\TicketsTemplates;
 
-class TicketTemplateRepository extends  EntityRepository implements TicketTemplates
+class TicketsTemplatesRepository extends  EntityRepository implements TicketsTemplates
 {
 
 
     /**
-     * @param TicketTemplate $ticketTemplate
+     * @param TicketsTemplate $ticketTemplate
      *
      * @return boolean
      */
-    public function insert(TicketTemplate $ticketTemplate)
+    public function insert(TicketsTemplate $ticketTemplate)
     {
         // TODO: Implement insert() method.
         $this->getEntityManager()->persist($ticketTemplate);
@@ -30,17 +30,18 @@ class TicketTemplateRepository extends  EntityRepository implements TicketTempla
     }
 
     /**
-     * @param TicketTemplate $ticketTemplate
+     * @param TicketsTemplate $ticketTemplate
      *
      * @return boolean
      */
-    public function update(TicketTemplate $ticketTemplate)
+    public function update(TicketsTemplate $ticketTemplate)
     {
         // TODO: Implement update() method.
     }
 
-    public  function findAll()
+    public  function findAllTickets()
     {
-//        return $this->getEntityManager()->getRepository("Domain:TicketTemplate")->findAll();
+        return $this->findAll();
+
     }
 }

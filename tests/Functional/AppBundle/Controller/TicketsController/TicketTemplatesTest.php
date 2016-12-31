@@ -3,7 +3,7 @@
 namespace tests\Functional\AppBundle\Controller\TicketsController;
 
 use Symfony\Component\HttpFoundation\Response;
-use Tests\Functional\Builders\TicketTemplateBuilder;
+use Tests\Functional\Builders\TicketTemplatesBuilder;
 use Tests\Functional\FunctionalTestCase;
 
 class TicketTemplatesTest extends FunctionalTestCase
@@ -13,9 +13,9 @@ class TicketTemplatesTest extends FunctionalTestCase
      */
     public function i_can_see_template_list_as_json()
     {
-        TicketTemplateBuilder::create()
+        TicketTemplatesBuilder::create()
             ->persist($this->container()->get('sinepu.repository.tickets_templates'));
-        TicketTemplateBuilder::create()
+        TicketTemplatesBuilder::create()
             ->withName("Sinepu!")
             ->withContent("This is a test.")
             ->persist($this->container()->get('sinepu.repository.tickets_templates'));

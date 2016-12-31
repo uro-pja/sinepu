@@ -2,7 +2,7 @@
 
 namespace Tickets\Application\Query\Result;
 
-use Tickets\Domain\TicketTemplate;
+use Tickets\Domain\TicketsTemplate;
 
 class TemplateResult
 {
@@ -35,11 +35,11 @@ class TemplateResult
     }
 
     /**
-     * @param TicketTemplate $ticketTemplate
+     * @param TicketsTemplate $ticketTemplate
      *
      * @return TemplateResult
      */
-    public static function createFromTicketTemplate(TicketTemplate $ticketTemplate)
+    public static function createFromTicketTemplate(TicketsTemplate $ticketTemplate)
     {
         return new self($ticketTemplate->getName(), $ticketTemplate->getContent(), $ticketTemplate->getAnnotations());
     }

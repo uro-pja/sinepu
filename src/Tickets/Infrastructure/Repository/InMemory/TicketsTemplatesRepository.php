@@ -3,22 +3,22 @@
 namespace Tickets\Infrastructure\Repository\InMemory;
 
 use Tickets\Domain\Exception\TicketTemplateNotFoundException;
-use Tickets\Domain\TicketTemplate;
-use Tickets\Domain\TicketTemplates;
+use Tickets\Domain\TicketsTemplate;
+use Tickets\Domain\TicketsTemplates;
 
-class TicketTemplatesRepository implements TicketTemplates
+class TicketsTemplatesRepository implements TicketsTemplates
 {
     /**
-     * @var TicketTemplate[]
+     * @var TicketsTemplate[]
      */
     private $ticketTemplates = [];
 
     /**
-     * @param TicketTemplate $ticketTemplate
+     * @param TicketsTemplate $ticketTemplate
      *
      * @return boolean
      */
-    public function insert(TicketTemplate $ticketTemplate)
+    public function insert(TicketsTemplate $ticketTemplate)
     {
         $this->ticketTemplates[$ticketTemplate->getUuid()->toString()] = $ticketTemplate;
 
@@ -26,13 +26,13 @@ class TicketTemplatesRepository implements TicketTemplates
     }
 
     /**
-     * @param TicketTemplate $ticketTemplate
+     * @param TicketsTemplate $ticketTemplate
      *
      * @return bool
      *
      * @throws TicketTemplateNotFoundException
      */
-    public function update(TicketTemplate $ticketTemplate)
+    public function update(TicketsTemplate $ticketTemplate)
     {
         if (!isset($this->ticketTemplates[$ticketTemplate->getUuid()->toString()])) {
             throw new TicketTemplateNotFoundException();
@@ -44,7 +44,7 @@ class TicketTemplatesRepository implements TicketTemplates
     }
 
     /**
-     * @return TicketTemplate[]
+     * @return TicketsTemplate[]
      */
     public function findAll()
     {

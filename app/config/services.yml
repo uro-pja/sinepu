@@ -4,10 +4,10 @@ parameters:
 
 services:
     sinepu.repository.tickets_templates:
-        class: Tickets\Infrastructure\Repository\Doctrine\TicketTemplateRepository
+        class: Tickets\Infrastructure\Repository\Doctrine\TicketsTemplatesRepository
         factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
-            - 'Tickets\Domain\TicketTemplate'
+            - 'Tickets\Domain\TicketsTemplate'
 
 
     sinepu.repository.tickets:

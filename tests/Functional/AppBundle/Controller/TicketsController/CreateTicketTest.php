@@ -3,7 +3,7 @@
 namespace Tests\Functional\AppBundle\Controller\TicketsController;
 
 use Symfony\Component\HttpFoundation\Response;
-use Tests\Functional\Builders\TicketTemplateBuilder;
+use Tests\Functional\Builders\TicketTemplatesBuilder;
 use Tests\Functional\FunctionalTestCase;
 
 class CreateTicketTest extends FunctionalTestCase
@@ -13,7 +13,7 @@ class CreateTicketTest extends FunctionalTestCase
      */
     public function i_can_create_new_ticket()
     {
-        TicketTemplateBuilder::create()
+        TicketTemplatesBuilder::create()
             ->withName('second')
             ->persist($this->container()->get('sinepu.repository.tickets_templates'));
 

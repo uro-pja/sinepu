@@ -4,7 +4,7 @@ namespace Tickets\Domain;
 
 use Ramsey\Uuid\UuidInterface;
 
-class TicketTemplate
+class TicketsTemplate
 {
     /**
      * @var UuidInterface
