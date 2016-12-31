@@ -1,6 +1,6 @@
 Tickets\Domain\Ticket:
     type: entity
-    table: ticket
+    table: Ticket
     repositoryClass: Tickets\Infrastructure\Repository\Doctrine\TicketsRepository
     id:
         uuid:

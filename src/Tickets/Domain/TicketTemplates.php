@@ -22,4 +22,6 @@ interface TicketTemplates
      * @return TicketTemplate[]
      */
     public function findAll();
+
+
 }
