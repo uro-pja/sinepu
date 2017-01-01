@@ -6,6 +6,7 @@ use AppBundle\Form\TicketTemplateForm;
 use AppBundle\Form\TicketType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use Symfony\Component\HttpFoundation\Request;
 
 class TicketsController extends Controller
@@ -66,15 +67,19 @@ class TicketsController extends Controller
     {
         $form = $this->createForm(TicketTemplateForm::class);
         $form->handleRequest($request);
-
+        $errors = null;
         if ($form->isValid()) {
-            $this->get('sinepu.handler.create_ticket_type')->handle($form->getData());
-
+            try {
+                $this->get('sinepu.handler.create_ticket_type')->handle($form->getData());
+            } catch (Exception $e) {
+                $errors= $e->getMessage();
+            }
         }
         $templates = $this->get('sinepu.query.ticket_templates')->findAll();
         return $this->render('tickets/TicketTemplate.html.twig', [
             'form' => $form->createView(),
-            'ticketTemplates' => $templates
+            'ticketTemplates' => $templates,
+            'error' => $errors
         ]);
     }
 
