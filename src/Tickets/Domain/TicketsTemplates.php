@@ -21,7 +21,7 @@ interface TicketsTemplates
     /**
      * @return TicketsTemplate[]
      */
-    public function findAllTickets();
+    public function getAll();
 
 
 }

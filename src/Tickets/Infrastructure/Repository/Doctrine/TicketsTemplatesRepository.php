@@ -52,4 +52,8 @@ class TicketsTemplatesRepository extends EntityRepository implements TicketsTemp
     {
         // TODO: Implement remove() method.
     }
+
+    /**
+     * @return TicketsTemplate[]
+     */
 }

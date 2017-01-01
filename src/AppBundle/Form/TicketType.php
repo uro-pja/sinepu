@@ -9,22 +9,22 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Tickets\Application\Command\CreateTicketCommand;
-use Tickets\Infrastructure\Repository\Doctrine\TicketsTemplatesRepository;
+use Tickets\Application\Query\Templates as TemplatesQuery;
 
 class TicketType extends AbstractType
 {
     /**
-     * @var TicketsTemplatesRepository
+     * @var TemplatesQuery
      */
-    private $templatesRepository;
+    private $templates;
 
     /**
      * TicketType constructor.
-     * @param TicketsTemplatesRepository $templatesRepository
+     * @param TemplatesQuery $templates
      */
-    public function __construct(TicketsTemplatesRepository $templatesRepository)
+    public function __construct(TemplatesQuery $templates)
     {
-        $this->templatesRepository = $templatesRepository;
+        $this->templates = $templates;
     }
 
     public function buildForm(FormBuilderInterface $formBuilder, array $option)
@@ -57,11 +57,13 @@ class TicketType extends AbstractType
      */
     private function getTemplatesChoiceList()
     {
-        $templates = $this->templatesRepository->findAll();
+
+
+        $templates = $this->templates->getAll();
 
         $data = [];
         foreach ($templates as $template){
-            $data[$template->getUuid()->toString()] = $template->getName();
+            $data[$template->name] = $template->name;
         }
 
         return $data;
