@@ -16,21 +16,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Tickets\Application\Command\CreateTicketTemplateCommand;
-use Tickets\Application\Query\Templates as TemplatesQuery;
 
 
 class TicketTemplateForm extends AbstractType
 {
-    /**
-     * @var TemplatesQuery
-     */
-    private $templates;
-
-    public function __construct(TemplatesQuery $templates)
-    {
-        $this->templates = $templates;
-    }
-
     public function buildForm(FormBuilderInterface $formBuilder, array $option)
     {
         $formBuilder
