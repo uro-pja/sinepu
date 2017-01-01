@@ -17,7 +17,7 @@ services:
             - 'Tickets\Domain\Ticket'
 
     sinepu.query.ticket_templates:
-        class: Tickets\Infrastructure\Query\TemplatesQuery
+        class: Tickets\Infrastructure\Query\TicketsTemplatesQuery
         arguments:
           - "@sinepu.repository.tickets_templates"
 
@@ -34,6 +34,14 @@ services:
     bundle.form.ticket_type:
         class: AppBundle\Form\TicketType
         arguments:
-          - '@sinepu.repository.tickets_templates'
+          - '@sinepu.query.ticket_templates'
         tags:
           - {name: form.type}
+
+    sinepu.handler.create_ticket_type:
+        class: Tickets\Application\Command\CreateTicketTemplateHandler
+        arguments:
+          - '@sinepu.repository.tickets_templates'
+
+    sinepu.handler.create_ticket_type_command:
+        class: Tickets\Application\Command\CreateTicketTemplateCommand

@@ -40,4 +40,30 @@ class TicketTemplatesTest extends FunctionalTestCase
         $this->assertEquals('This is a test.', $response[1]->content);
         $this->assertEquals('asdf', $response[1]->annotations);
     }
+
+    /**
+     * @test
+     */
+    public function i_can_create_new_ticket_via_command()
+    {
+        $ticketRepository = $this->container()->get('sinepu.repository.tickets_templates');
+        $handler = $this->container()->get('sinepu.handler.create_ticket_type');
+        $command = $this->container()->get('sinepu.handler.create_ticket_type_command');
+        $command->annotations = "ads";
+        $command->name = "name_test";
+        $command->content = "content";
+        $handler->handler($command);
+
+
+        $tickets = $ticketRepository->getAll();
+        $this->assertEquals(1, count($tickets));
+
+        $ticket = reset($tickets);
+
+        $this->assertEquals('content', $ticket->getContent());
+        $this->assertEquals('name_test',$ticket->getName());
+        $this->assertEquals('ads',$ticket->getannotations());
+    }
+
+
 }
