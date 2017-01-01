@@ -17,7 +17,7 @@
             <tbody>
             {% for ticket in tickets %}
             <tr>
-                <td>1</td>
+                <td>{{ loop.index }}</td>
                 <td>{{ ticket.type }}</td>
                 <td>{{ ticket.createdAt|date }}</td>
                 <td>{{ ticket.updatedAt|date }}</td>

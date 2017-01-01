@@ -3,6 +3,14 @@
 {% block page_title %}Templaty Podan{% endblock %}
 {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
 {% block body %}
+
+  {%  if error.name is defined  %}
+
+      <div class="alert alert-danger" role="alert">Nazwa Podania istnieje w bazie</div>
+
+  {% endif %}
+
+
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
