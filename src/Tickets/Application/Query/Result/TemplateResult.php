@@ -7,6 +7,9 @@ use Tickets\Domain\TicketsTemplate;
 
 class TemplateResult
 {
+    /**
+     * @var UuidInterface
+     */
     public $uuid;
 
     /**
@@ -46,6 +49,6 @@ class TemplateResult
      */
     public static function createFromTicketTemplate(TicketsTemplate $ticketTemplate)
     {
-        return new self($ticketTemplate->getUuid(),$ticketTemplate->getName(), $ticketTemplate->getContent(), $ticketTemplate->getAnnotations());
+        return new self($ticketTemplate->getUuid(), $ticketTemplate->getName(), $ticketTemplate->getContent(), $ticketTemplate->getAnnotations());
     }
 }

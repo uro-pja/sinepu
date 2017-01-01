@@ -62,7 +62,7 @@ class TicketsController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function templatesAction(Request $request)
+    public function templatesListAndAdd(Request $request)
     {
         $form = $this->createForm(TicketTemplateForm::class);
         $form->handleRequest($request);

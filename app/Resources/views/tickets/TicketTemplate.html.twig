@@ -23,7 +23,7 @@
             <tbody>
             {% for ticketTemplates in ticketTemplates %}
                 <tr>
-                    <td>1</td>
+                    <td>{{ loop.index }}</td>
                     <td>{{ ticketTemplates.name }}</td>
                     <td>{{ ticketTemplates.annotations }}</td>
                     <td>{{ ticketTemplates.content }}</td>

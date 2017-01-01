@@ -58,9 +58,7 @@ class TicketType extends AbstractType
     private function getTemplatesChoiceList()
     {
 
-
         $templates = $this->templates->findAll();
-
         $data = [];
         foreach ($templates as $template){
             $data[$template->name] = $template->name;

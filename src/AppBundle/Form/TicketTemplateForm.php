@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: arsob
- * Date: 01/01/17
- * Time: 11:32
- */
 
 namespace AppBundle\Form;
-
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -16,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Tickets\Application\Command\CreateTicketTemplateCommand;
-
 
 class TicketTemplateForm extends AbstractType
 {
@@ -35,7 +27,6 @@ class TicketTemplateForm extends AbstractType
                     'label' => 'Wyslij',
                 ]
             );
-
     }
 
     public function configureOptions(OptionsResolver $optionsResolver)

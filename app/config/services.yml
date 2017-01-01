@@ -40,10 +40,6 @@ services:
 
     bundle.form.ticket_template_type:
         class: AppBundle\Form\TicketTemplateForm
-        arguments:
-          - '@sinepu.query.ticket_templates'
-        tags:
-          - {name: form.type}
 
     sinepu.handler.create_ticket_type:
         class: Tickets\Application\Command\CreateTicketTemplateHandler
