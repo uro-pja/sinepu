@@ -28,7 +28,7 @@ class TicketsTemplatesQuery implements Templates
      */
     public function getAll()
     {
-        $tickets = $this->ticketTemplates->findAll();
+        $tickets = $this->ticketTemplates->getAll();
 
         $data = [];
         foreach ($tickets as $ticket) {
@@ -37,15 +37,20 @@ class TicketsTemplatesQuery implements Templates
 
         return $data;
     }
+
+    /**
+     * @return TemplateResult[]
+     */
     public function getNames()
     {
-        $tickets = $this->ticketTemplates->findAll();
+        $tickets = $this->ticketTemplates->getAll();
 
         $data = [];
         foreach ($tickets as $ticket) {
             $data[] = TemplateResult::createFromTicketTemplate($ticket);
         }
         var_dump($data);
+        return $data;
 
     }
 }

@@ -4,7 +4,6 @@ namespace Tickets\Infrastructure\Query;
 
 use Ramsey\Uuid\Uuid;
 use Tickets\Application\Query\Result\TicketResult;
-use Tickets\Application\Query\Templates;
 use Tickets\Domain\Ticket;
 use Tickets\Domain\Tickets;
 
@@ -29,12 +28,10 @@ class TicketsQuery implements Tickets
     public function getAll()
     {
         $tickets = $this->tickets->findAll();
-
         $data = [];
         foreach ($tickets as $ticket) {
             $data[] = TicketResult::createFromTicket($ticket);
         }
-
         return $data;
     }
 

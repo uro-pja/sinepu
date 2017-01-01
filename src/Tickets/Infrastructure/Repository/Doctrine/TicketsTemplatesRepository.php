@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 use Tickets\Domain\TicketsTemplate;
 use Tickets\Domain\TicketsTemplates;
 
-class TicketsTemplatesRepository extends  EntityRepository implements TicketsTemplates
+class TicketsTemplatesRepository extends EntityRepository implements TicketsTemplates
 {
 
 
@@ -39,9 +39,17 @@ class TicketsTemplatesRepository extends  EntityRepository implements TicketsTem
         // TODO: Implement update() method.
     }
 
-    public  function findAllTickets()
+    /**
+     * @return array
+     */
+    public function getAll()
     {
         return $this->findAll();
 
+    }
+
+    public function remove(TicketsTemplate $ticketsTemplate)
+    {
+        // TODO: Implement remove() method.
     }
 }
