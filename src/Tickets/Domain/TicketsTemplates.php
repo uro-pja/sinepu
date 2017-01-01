@@ -21,7 +21,12 @@ interface TicketsTemplates
     /**
      * @return TicketsTemplate[]
      */
-    public function getAll();
+    public function findAll();
 
-
+    /**
+     * @param string $name
+     *
+     * @return boolean
+     */
+    public function existWithName($name);
 }

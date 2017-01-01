@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: arsob
- * Date: 31/12/16
- * Time: 16:59
- */
 
 namespace Tickets\Infrastructure\Repository\Doctrine;
-
 
 use Doctrine\ORM\EntityRepository;
 use Tickets\Domain\TicketsTemplate;
@@ -15,8 +8,6 @@ use Tickets\Domain\TicketsTemplates;
 
 class TicketsTemplatesRepository extends EntityRepository implements TicketsTemplates
 {
-
-
     /**
      * @param TicketsTemplate $ticketTemplate
      *
@@ -27,6 +18,8 @@ class TicketsTemplatesRepository extends EntityRepository implements TicketsTemp
         // TODO: Implement insert() method.
         $this->getEntityManager()->persist($ticketTemplate);
         $this->getEntityManager()->flush();
+
+        return true;
     }
 
     /**
@@ -39,21 +32,18 @@ class TicketsTemplatesRepository extends EntityRepository implements TicketsTemp
         // TODO: Implement update() method.
     }
 
-    /**
-     * @return array
-     */
-    public function getAll()
-    {
-        return $this->findAll();
-
-    }
-
     public function remove(TicketsTemplate $ticketsTemplate)
     {
         // TODO: Implement remove() method.
     }
 
     /**
-     * @return TicketsTemplate[]
+     * @param string $name
+     *
+     * @return boolean
      */
+    public function existWithName($name)
+    {
+        return (bool)$this->findOneBy(['name' => $name]);
+    }
 }

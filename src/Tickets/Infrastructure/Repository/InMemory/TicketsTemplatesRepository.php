@@ -50,4 +50,19 @@ class TicketsTemplatesRepository implements TicketsTemplates
     {
         return $this->ticketTemplates;
     }
+
+    /**
+     * @param string $name
+     *
+     * @return boolean
+     */
+    public function existWithName($name)
+    {
+        if (array_search($name, $this->ticketTemplates)) {
+
+            return true;
+        }
+
+        return false;
+    }
 }
