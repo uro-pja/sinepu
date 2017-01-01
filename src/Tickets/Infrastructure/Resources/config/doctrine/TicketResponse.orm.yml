@@ -1,0 +1,19 @@
+Tickets\Domain\TicketResponse:
+    type: entity
+    table: TicketResponse
+    repositoryClass: Tickets\Infrastructure\Repository\Doctrine\TicketResponse
+    id:
+        uuid:
+            type: uuid
+            generator:
+                strategy: NONE
+    fields:
+        ticketUuid:
+            oneToOne:
+                ticketUuid:
+                  targetEntity: Ticket
+                  mappedBy: uuid
+        content:
+            type: text
+        createdAt:
+            type: datetime
