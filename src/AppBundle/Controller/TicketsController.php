@@ -17,7 +17,7 @@ class TicketsController extends Controller
      */
     public function listAction(Request $request)
     {
-        $tickets = $this->container->get('sinepu.query.tickets')->getAll();
+        $tickets = $this->get('sinepu.query.tickets')->findAll();
 
         return $this->render('tickets/TicketList.html.twig', [
             'tickets' => $tickets
@@ -71,7 +71,7 @@ class TicketsController extends Controller
             $this->get('sinepu.handler.create_ticket_type')->handle($form->getData());
 
         }
-        $templates = $this->get('sinepu.query.ticket_templates')->getAll();
+        $templates = $this->get('sinepu.query.ticket_templates')->findAll();
         return $this->render('tickets/TicketTemplate.html.twig', [
             'form' => $form->createView(),
             'ticketTemplates' => $templates
@@ -85,7 +85,7 @@ class TicketsController extends Controller
      */
     public function viewAction(Request $request)
     {
-        $ticketRepository = $this->container->get('sinepu.repository.tickets');
+        $ticketRepository = $this->get('sinepu.repository.tickets');
 
         return $this->render("tickets/TicketView.html.twig", [
             'tickets' => $ticketRepository->findAll()

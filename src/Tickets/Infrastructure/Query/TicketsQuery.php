@@ -24,7 +24,7 @@ class TicketsQuery implements Tickets
     /**
      * @return TicketResult[]
      */
-    public function getAll()
+    public function findAll()
     {
         $tickets = $this->tickets->findAll();
         $data = [];

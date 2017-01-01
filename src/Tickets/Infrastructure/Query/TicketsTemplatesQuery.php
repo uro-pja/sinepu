@@ -26,9 +26,9 @@ class TicketsTemplatesQuery implements Templates
     /**
      * @return TemplateResult[]
      */
-    public function getAll()
+    public function findAll()
     {
-        $tickets = $this->ticketTemplates->getAll();
+        $tickets = $this->ticketTemplates->findAll();
 
         $data = [];
         foreach ($tickets as $ticket) {
@@ -43,7 +43,7 @@ class TicketsTemplatesQuery implements Templates
      */
     public function getNames()
     {
-        $tickets = $this->ticketTemplates->getAll();
+        $tickets = $this->ticketTemplates->findAll();
 
         $data = [];
         foreach ($tickets as $ticket) {

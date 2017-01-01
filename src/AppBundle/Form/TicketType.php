@@ -59,7 +59,7 @@ class TicketType extends AbstractType
     {
 
 
-        $templates = $this->templates->getAll();
+        $templates = $this->templates->findAll();
 
         $data = [];
         foreach ($templates as $template){
