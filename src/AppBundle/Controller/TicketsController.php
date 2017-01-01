@@ -2,12 +2,11 @@
 
 namespace AppBundle\Controller;
 
-use DateTimeImmutable;
+use AppBundle\Form\TicketType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Tickets\Application\Query\Result\TicketResult;
 
 class TicketsController extends Controller
 {
@@ -18,37 +17,32 @@ class TicketsController extends Controller
      */
     public function listAction(Request $request)
     {
-        $ticketResult = new TicketResult(
-            'Usuniecie konta',
-            'Oczekuje na analize',
-            new DateTimeImmutable('@946684800'),
-            new DateTimeImmutable('@1056689999')
-        );
+        $tickets = $this->container->get('sinepu.query.tickets')->getAll();
 
-        /**
-         * R
-         */
-        $data = [
-            'tickets' => [
-                $ticketResult
-            ]
-        ];
-
-        return $this->render('tickets/TicketList.html.twig', $data);
+        return $this->render('tickets/TicketList.html.twig', [
+            'tickets' => $tickets
+        ]);
     }
 
     /**
      * @param Request $request
-     * @Route("/tickets/create", name="tickers_create", methods={"GET"})
+     * @Route("/tickets/create", name="tickers_create", methods={"GET", "POST"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request)
     {
+        $form = $this->createForm(TicketType::class);
+        $form->handleRequest($request);
 
-        return $this->render('tickets/TicketAdd.html.twig');
-        /**
-         * R
-         */
+        if ($form->isValid()) {
+            $this->get('sinepu.handler.create_ticket')->handle($form->getData());
+
+            return $this->redirect($this->generateUrl("tickets_index"));
+        }
+
+        return $this->render('tickets/ticket_add.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
@@ -70,7 +64,7 @@ class TicketsController extends Controller
      */
     public function templatesAction(Request $request)
     {
-        $templates = $this->get('sinepu.tickets.application.query.templates')->getAll();
+        $templates = $this->get('sinepu.query.ticket_templates')->getAll();
 
         return new JsonResponse($templates);
     }
@@ -78,22 +72,14 @@ class TicketsController extends Controller
     /**
      * @param Request $request
      * @Route("/tickets/{uuid}", name="tickets_view", methods={"GET"})
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewAction(Request $request)
     {
-        /**
-         * R
-         */
-    }
+        $ticketRepository = $this->container->get('sinepu.repository.tickets');
 
-    /**
-     * @param Request $request
-     * @Route("/tickets", name="tickets_insert", methods={"POST"})
-     */
-    public function insertAction(Request $request)
-    {
-        /**
-         * W
-         */
+        return $this->render("tickets/TicketView.html.twig", [
+            'tickets' => $ticketRepository->findAll()
+        ]);
     }
 }

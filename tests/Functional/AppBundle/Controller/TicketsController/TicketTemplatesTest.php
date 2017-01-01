@@ -1,51 +1,28 @@
 <?php
 
-namespace Tests\Functional\AppBundle\Controller;
+namespace tests\Functional\AppBundle\Controller\TicketsController;
 
+use Symfony\Component\HttpFoundation\Response;
 use Tests\Functional\Builders\TicketTemplateBuilder;
 use Tests\Functional\FunctionalTestCase;
 
-class TicketsControllerTest extends FunctionalTestCase
+class TicketTemplatesTest extends FunctionalTestCase
 {
-    /**
-     * @test
-     */
-    public function i_can_see_tickets()
-    {
-        /**
-         * GIVEN
-         *
-         * Add 1 object to database
-         *
-         */
-
-        $crawler = $this->request('GET', '/tickets');
-
-        $this->assertResponseStatus(200);
-        $this->assertResponseIsHtml();
-
-        $this->assertContains('Usuniecie konta', $this->response()->getContent());
-        $this->assertContains('January 1, 2000 00:00', $this->response()->getContent());
-        $this->assertContains('June 27, 2003 04:59', $this->response()->getContent());
-        $this->assertContains('Oczekuje na analize', $this->response()->getContent());
-
-    }
-
     /**
      * @test
      */
     public function i_can_see_template_list_as_json()
     {
         TicketTemplateBuilder::create()
-            ->persist($this->container()->get('sinepu.tickets.templates_repository'));
+            ->persist($this->container()->get('sinepu.repository.tickets_templates'));
         TicketTemplateBuilder::create()
             ->withName("Sinepu!")
             ->withContent("This is a test.")
-            ->persist($this->container()->get('sinepu.tickets.templates_repository'));
+            ->persist($this->container()->get('sinepu.repository.tickets_templates'));
 
         $this->request('GET', '/tickets/templates');
 
-        $this->assertResponseStatus(200);
+        $this->assertResponseStatus(Response::HTTP_OK);
         $this->assertResponseIsJson();
 
         $response = json_decode($this->response()->getContent());

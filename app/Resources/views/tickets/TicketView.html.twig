@@ -1,0 +1,106 @@
+{% extends "base.html.twig" %}
+{% block body %}
+    <h1>Podanie</h1>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            {#<tr>#}
+            {#<th>Status</th>#}
+            {#<th>Tytul</th>#}
+            {#<th>Data utwozenia</th>#}
+            {#<th>Data ostatnej aktualizacji</th>#}
+            {#<th>Tresc</th>#}
+            {#</tr>#}
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    Status
+                </td>
+                <td>
+                    oczekuje
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Tytul
+                </td>
+                <td>
+                    Soczyste trampki
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Data utwozenia
+                </td>
+                <td>
+                    29.10.2011
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Tresc
+                </td>
+                <td>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed dapibus leo. Etiam vel eros
+                    commodo, ultricies ligula ac, vehicula lectus. Duis bibendum aliquam euismod. Vestibulum venenatis
+                    iaculis nisi eu iaculis. Maecenas placerat posuere dolor, dignissim accumsan eros rhoncus quis. Nunc
+                    id euismod elit. Aliquam at vestibulum justo. Donec laoreet odio quam, eu suscipit diam laoreet non.
+                </td>
+            </tr>
+            {#<tr>#}
+                {#<td>Oczekiwanie</td>#}
+                {#<td>Soczyste trampki</td>#}
+                {#<td>29.10.2011</td>#}
+                {#<th> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed dapibus leo. Etiam vel eros#}
+                    {#commodo, ultricies ligula ac, vehicula lectus. Duis bibendum aliquam euismod. Vestibulum venenatis#}
+                    {#iaculis nisi eu iaculis. Maecenas placerat posuere dolor, dignissim accumsan eros rhoncus quis. Nunc#}
+                    {#id euismod elit. Aliquam at vestibulum justo. Donec laoreet odio quam, eu suscipit diam laoreet non.#}
+                {#</th>#}
+            {#</tr>#}
+            </tbody>
+        </table>
+    </div>
+Odpowiedz :
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <td>
+                    Od
+                </td>
+                <td>
+                    Jaana krzak
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Data utwozenia
+                </td>
+                <td>
+                    29.10.2011
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Odpowiedz
+                </td>
+                <td>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed dapibus leo. Etiam vel eros
+                    commodo, ultricies ligula ac, vehicula lectus. Duis bibendum aliquam euismod. Vestibulum venenatis
+                    iaculis nisi eu iaculis. Maecenas placerat posuere dolor, dignissim accumsan eros rhoncus quis. Nunc
+                    id euismod elit. Aliquam at vestibulum justo. Donec laoreet odio quam, eu suscipit diam laoreet non.
+                </td>
+            </tr>
+            <td>
+                Decyzja studenta
+            </td>
+            <td>
+                <button type="button" class="btn btn-success">Success</button> <button type="button" class="btn btn-danger">Danger</button>            </td>
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

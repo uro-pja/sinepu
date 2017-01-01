@@ -3,6 +3,7 @@
 namespace Tickets\Application\Query\Result;
 
 use DateTimeInterface;
+use Tickets\Domain\Ticket;
 use Tickets\Domain\TicketTemplate;
 
 class TicketResult
@@ -34,11 +35,21 @@ class TicketResult
      * @param DateTimeInterface $createdAt
      * @param DateTimeInterface $updatedAt
      */
-    public function __construct($type, $status, DateTimeInterface $createdAt, DateTimeInterface $updatedAt)
+    public function __construct($type, $status, DateTimeInterface $createdAt, DateTimeInterface $updatedAt = null)
     {
         $this->type = $type;
         $this->status = $status;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @param Ticket $ticket
+     *
+     * @return self
+     */
+    public static function createFromTicket(Ticket $ticket)
+    {
+        return new self($ticket->getType(), 'not-implemented', $ticket->getCreatedAt(), $ticket->getUpdatedAt());
     }
 }

@@ -1,17 +1,35 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html
 parameters:
-#    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-
-    sinepu.tickets.templates_repository:
+    sinepu.repository.tickets_templates:
         class: Tickets\Infrastructure\Repository\InMemory\TicketTemplatesRepository
 
-    sinepu.tickets.application.query.templates:
+    sinepu.repository.tickets:
+        class: Tickets\Infrastructure\Repository\Doctrine\TicketsRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+            - 'Tickets\Domain\Ticket'
+
+    sinepu.query.ticket_templates:
         class: Tickets\Infrastructure\Query\TemplatesQuery
         arguments:
-          - "@sinepu.tickets.templates_repository"
+          - "@sinepu.repository.tickets_templates"
+
+    sinepu.query.tickets:
+        class: Tickets\Infrastructure\Query\TicketsQuery
+        arguments:
+          - "@sinepu.repository.tickets"
+
+    sinepu.handler.create_ticket:
+        class: Tickets\Application\Command\CreateTicketHandler
+        arguments:
+          - '@sinepu.repository.tickets'
+
+    bundle.form.ticket_type:
+        class: AppBundle\Form\TicketType
+        arguments:
+          - '@sinepu.repository.tickets_templates'
+        tags:
+          - {name: form.type}

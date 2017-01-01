@@ -7,6 +7,8 @@ framework:
         storage_id: session.storage.mock_file
     profiler:
         collect: false
+    form:
+        csrf_protection: false
 
 web_profiler:
     toolbar: false
@@ -14,3 +16,8 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+doctrine:
+    dbal:
+        driver: pdo_sqlite
+        path:   '%kernel.cache_dir%/test.db'

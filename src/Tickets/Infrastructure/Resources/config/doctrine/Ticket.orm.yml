@@ -1,0 +1,22 @@
+Tickets\Domain\Ticket:
+    type: entity
+    table: ticket
+    repositoryClass: Tickets\Infrastructure\Repository\Doctrine\TicketsRepository
+    id:
+        uuid:
+            type: uuid
+            generator:
+                strategy: NONE
+    fields:
+        content:
+            type: text
+        type:
+            type: string
+        files:
+            type: array
+            nullable: true
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+            nullable: true

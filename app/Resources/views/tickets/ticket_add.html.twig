@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+
+{% block page_title %}Kreator Podania{% endblock %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}

@@ -37,4 +37,15 @@ class TemplatesQuery implements Templates
 
         return $data;
     }
+    public function getNames()
+    {
+        $tickets = $this->ticketTemplates->findAll();
+
+        $data = [];
+        foreach ($tickets as $ticket) {
+            $data[] = TemplateResult::createFromTicketTemplate($ticket);
+        }
+        var_dump($data);
+
+    }
 }
