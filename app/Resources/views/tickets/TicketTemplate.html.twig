@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block page_title %}Templaty Podan{% endblock %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Typ Podania</th>
+                <th>Adnotacje</th>
+                <th>Tresc</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for ticketTemplates in ticketTemplates %}
+                <tr>
+                    <td>1</td>
+                    <td>{{ ticketTemplates.name }}</td>
+                    <td>{{ ticketTemplates.annotations }}</td>
+                    <td>{{ ticketTemplates.content }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

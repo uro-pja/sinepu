@@ -10,13 +10,11 @@ namespace AppBundle\Form;
 
 
 use Symfony\Component\Form\AbstractType;
-
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Tickets\Application\Command\CreateTicketCommand;
 use Tickets\Application\Command\CreateTicketTemplateCommand;
 use Tickets\Application\Query\Templates as TemplatesQuery;
 
@@ -36,8 +34,13 @@ class TicketTemplateForm extends AbstractType
     public function buildForm(FormBuilderInterface $formBuilder, array $option)
     {
         $formBuilder
-            ->add('name', TextareaType::class, [
-                'label' => 'Tresc podania!',
+            ->add('name', TextType::class, [
+                'label' => 'Nazwa Podania',
+            ])->add('annotations', TextType::class, [
+                'label' => 'Adnotatcje'
+            ])
+            ->add('content', TextareaType::class, [
+                'label' => 'Tresc Podania'
             ])
             ->add('save', SubmitType::class, [
                     'label' => 'Wyslij',

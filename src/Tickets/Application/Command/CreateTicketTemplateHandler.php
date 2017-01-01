@@ -29,7 +29,7 @@ class CreateTicketTemplateHandler
     /**
      * @param CreateTicketTemplateCommand $command
      */
-    public function handler(CreateTicketTemplateCommand $command)
+    public function handle(CreateTicketTemplateCommand $command)
     {
         $ticketTemplate = new TicketsTemplate(
             $command->uuid,

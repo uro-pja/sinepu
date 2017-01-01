@@ -2,10 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\TicketTemplateForm;
 use AppBundle\Form\TicketType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class TicketsController extends Controller
@@ -58,15 +58,24 @@ class TicketsController extends Controller
 
     /**
      * @param Request $request
-     * @Route("/tickets/templates", name="tickets_templates", methods={"GET"})
+     * @Route("/admin/tickets/templates", name="tickets_templates", methods={"GET","POST"})
      *
-     * @return JsonResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function templatesAction(Request $request)
     {
-        $templates = $this->get('sinepu.query.ticket_templates')->getAll();
+        $form = $this->createForm(TicketTemplateForm::class);
+        $form->handleRequest($request);
 
-        return new JsonResponse($templates);
+        if ($form->isValid()) {
+            $this->get('sinepu.handler.create_ticket_type')->handle($form->getData());
+
+        }
+        $templates = $this->get('sinepu.query.ticket_templates')->getAll();
+        return $this->render('tickets/TicketTemplate.html.twig', [
+            'form' => $form->createView(),
+            'ticketTemplates' => $templates
+        ]);
     }
 
     /**
