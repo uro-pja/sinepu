@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -38,18 +39,17 @@ class TicketType extends AbstractType
             ->add('content', TextareaType::class, [
                 'label' => 'Tresc podania!',
             ])
+            ->add('files', FileType::class,
+                ['label' => "Zalacznik",
+                    'required' => false,
+                    'multiple' => true,
+                ])
+
             ->add('save', SubmitType::class, [
                     'label' => 'Wyslij',
                 ]
             );
 
-    }
-
-    public function configureOptions(OptionsResolver $optionsResolver)
-    {
-        $optionsResolver->setDefaults([
-            'data_class' => CreateTicketCommand::class
-        ]);
     }
 
     /**
@@ -58,12 +58,19 @@ class TicketType extends AbstractType
     private function getTemplatesChoiceList()
     {
 
-        $templates = $this->templates->findAll();
+        $templates = $this->templates->getAll();
         $data = [];
-        foreach ($templates as $template){
+        foreach ($templates as $template) {
             $data[$template->name] = $template->name;
         }
 
         return $data;
+    }
+
+    public function configureOptions(OptionsResolver $optionsResolver)
+    {
+        $optionsResolver->setDefaults([
+            'data_class' => CreateTicketCommand::class
+        ]);
     }
 }

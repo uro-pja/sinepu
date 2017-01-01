@@ -9,5 +9,5 @@ interface Templates
     /**
      * @return TemplateResult[]
      */
-    public function findAll();
+    public function getAll();
 }

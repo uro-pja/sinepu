@@ -28,7 +28,8 @@ class CreateTicketHandler
         $ticket = new Ticket(
             $command->uuid,
             $command->content,
-            $command->type
+            $command->type,
+            $command->files
         );
 
         $this->ticketsRepository->insert($ticket);

@@ -6,20 +6,19 @@ use AppBundle\Form\TicketTemplateForm;
 use AppBundle\Form\TicketType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Symfony\Component\HttpFoundation\Request;
 use Tickets\Domain\Exception\TicketTemplateAlreadyExistException;
 
 class TicketsController extends Controller
 {
     /**
-     * @param Request $request
      * @Route("/tickets", name="tickets_index", methods={"GET"})
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction(Request $request)
+    public function listAction()
     {
-        $tickets = $this->get('sinepu.query.tickets')->findAll();
+        $tickets = $this->get('sinepu.query.tickets')->getAll();
 
         return $this->render('tickets/TicketList.html.twig', [
             'tickets' => $tickets
@@ -73,10 +72,10 @@ class TicketsController extends Controller
             try {
                 $this->get('sinepu.handler.create_ticket_type')->handle($form->getData());
             } catch (TicketTemplateAlreadyExistException $e) {
-                $errors = [ "name" => "Nazwa Zajeta"];
+                $errors = ["name" => "Nazwa Zajeta"];
             }
         }
-        $templates = $this->get('sinepu.query.ticket_templates')->findAll();
+        $templates = $this->get('sinepu.query.ticket_templates')->getAll();
         return $this->render('tickets/TicketTemplate.html.twig', [
             'form' => $form->createView(),
             'ticketTemplates' => $templates,
@@ -85,16 +84,17 @@ class TicketsController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @Route("/tickets/{uuid}", name="tickets_view", methods={"GET"})
+     * @param string $uuid
      * @return \Symfony\Component\HttpFoundation\Response
+     * @internal param Request $request
+     * @Route("/tickets/{uuid}", name="tickets_view", methods={"GET"})
      */
-    public function viewAction(Request $request)
+    public function viewAction($uuid)
     {
-        $ticketRepository = $this->get('sinepu.repository.tickets');
+        $ticket = $this->get('sinepu.query.tickets')->getTicket($uuid);
 
         return $this->render("tickets/TicketView.html.twig", [
-            'tickets' => $ticketRepository->findAll()
+            'ticket' => $ticket
         ]);
     }
 }

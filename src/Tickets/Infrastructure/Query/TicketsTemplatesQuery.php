@@ -26,7 +26,7 @@ class TicketsTemplatesQuery implements Templates
     /**
      * @return TemplateResult[]
      */
-    public function findAll()
+    public function getAll()
     {
         $tickets = $this->ticketsTemplates->findAll();
 

@@ -2,7 +2,7 @@
 
 namespace Tickets\Domain;
 
-use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 interface Tickets
 {
@@ -14,11 +14,11 @@ interface Tickets
     public function insert(Ticket $ticket);
 
     /**
-     * @param Uuid $uuid
+     * @param UuidInterface $uuid
      *
      * @return Ticket
      */
-    public function findOneByUuid(Uuid $uuid);
+    public function findOneByUuid(UuidInterface $uuid);
 
     /**
      * @return Ticket[]|array

@@ -3,7 +3,7 @@
 namespace Tickets\Infrastructure\Repository\Doctrine;
 
 use Doctrine\ORM\EntityRepository;
-use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Tickets\Domain\Ticket;
 use Tickets\Domain\Tickets;
 
@@ -23,11 +23,11 @@ class TicketsRepository extends EntityRepository implements Tickets
     }
 
     /**
-     * @param Uuid $uuid
+     * @param UuidInterface $uuid
      *
      * @return Ticket|object
      */
-    public function findOneByUuid(Uuid $uuid)
+    public function findOneByUuid(UuidInterface $uuid)
     {
         return $this->findOneBy(['uuid' => $uuid]);
     }

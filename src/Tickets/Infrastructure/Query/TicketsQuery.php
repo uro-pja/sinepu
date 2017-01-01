@@ -2,8 +2,11 @@
 
 namespace Tickets\Infrastructure\Query;
 
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Tickets\Application\Query\Result\TicketResult;
 use Tickets\Application\Query\Tickets;
+use Tickets\Domain\Exception\TicketNotFoundException;
 use Tickets\Domain\Tickets as TicketsRepository;
 
 class TicketsQuery implements Tickets
@@ -24,7 +27,7 @@ class TicketsQuery implements Tickets
     /**
      * @return TicketResult[]
      */
-    public function findAll()
+    public function getAll()
     {
         $tickets = $this->tickets->findAll();
         $data = [];
@@ -32,5 +35,21 @@ class TicketsQuery implements Tickets
             $data[] = TicketResult::createFromTicket($ticket);
         }
         return $data;
+    }
+
+    /**
+     * @param string $uuid
+     * @return TicketResult
+     * @throws TicketNotFoundException
+     */
+    public function getTicket(string $uuid)
+    {
+        $ticket = $this->tickets->findOneByUuid(Uuid::fromString($uuid));
+
+        if ($ticket === null) {
+            throw new TicketNotFoundException();
+        }
+
+        return TicketResult::createFromTicket($ticket);
     }
 }

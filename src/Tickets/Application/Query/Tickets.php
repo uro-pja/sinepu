@@ -9,5 +9,12 @@ interface Tickets
     /**
      * @return TicketResult[]
      */
-    public function findAll();
+    public function getAll();
+
+    /**
+     * @param string $uuid
+     *
+     * @return TicketResult
+     */
+    public function getTicket(string $uuid);
 }
