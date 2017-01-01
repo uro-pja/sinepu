@@ -13,14 +13,14 @@ class TicketsTemplatesQuery implements Templates
      */
     private $ticketsTemplates;
 
+
     /**
-     * TemplatesQuery constructor.
-     *
-     * @param TicketsTemplates $ticketTemplates
+     * TicketsTemplatesQuery constructor.
+     * @param TicketsTemplates $ticketsTemplates
      */
-    public function __construct(TicketsTemplates $ticketTemplates)
+    public function __construct(TicketsTemplates $ticketsTemplates)
     {
-        $this->ticketsTemplates = $ticketTemplates;
+        $this->ticketsTemplates = $ticketsTemplates;
     }
 
     /**
