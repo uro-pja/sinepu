@@ -6,7 +6,7 @@ use Tickets\Application\Query\Result\TemplateResult;
 use Tickets\Application\Query\Templates;
 use Tickets\Domain\TicketsTemplates;
 
-class TemplatesQuery implements Templates
+class TicketsTemplatesQuery implements Templates
 {
     /**
      * @var TicketsTemplates

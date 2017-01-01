@@ -2,11 +2,13 @@
 
 namespace Tickets\Infrastructure\Query;
 
+use Ramsey\Uuid\Uuid;
 use Tickets\Application\Query\Result\TicketResult;
 use Tickets\Application\Query\Templates;
+use Tickets\Domain\Ticket;
 use Tickets\Domain\Tickets;
 
-class TicketsQuery implements Templates
+class TicketsQuery implements Tickets
 {
     /**
      * @var Tickets
@@ -34,5 +36,33 @@ class TicketsQuery implements Templates
         }
 
         return $data;
+    }
+
+    /**
+     * @param Ticket $ticket
+     *
+     * @return boolean
+     */
+    public function insert(Ticket $ticket)
+    {
+        // TODO: Implement insert() method.
+    }
+
+    /**
+     * @param Uuid $uuid
+     *
+     * @return Ticket
+     */
+    public function findOneByUuid(Uuid $uuid)
+    {
+        // TODO: Implement findOneByUuid() method.
+    }
+
+    /**
+     * @return Ticket[]|array
+     */
+    public function findAll()
+    {
+        // TODO: Implement findAll() method.
     }
 }
