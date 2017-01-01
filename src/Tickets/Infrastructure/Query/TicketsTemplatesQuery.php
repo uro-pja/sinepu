@@ -11,7 +11,7 @@ class TicketsTemplatesQuery implements Templates
     /**
      * @var TicketsTemplates
      */
-    private $ticketTemplates;
+    private $ticketsTemplates;
 
     /**
      * TemplatesQuery constructor.
@@ -20,7 +20,7 @@ class TicketsTemplatesQuery implements Templates
      */
     public function __construct(TicketsTemplates $ticketTemplates)
     {
-        $this->ticketTemplates = $ticketTemplates;
+        $this->ticketsTemplates = $ticketTemplates;
     }
 
     /**
@@ -28,7 +28,7 @@ class TicketsTemplatesQuery implements Templates
      */
     public function findAll()
     {
-        $tickets = $this->ticketTemplates->findAll();
+        $tickets = $this->ticketsTemplates->findAll();
 
         $data = [];
         foreach ($tickets as $ticket) {
@@ -43,7 +43,7 @@ class TicketsTemplatesQuery implements Templates
      */
     public function getNames()
     {
-        $tickets = $this->ticketTemplates->findAll();
+        $tickets = $this->ticketsTemplates->findAll();
 
         $data = [];
         foreach ($tickets as $ticket) {
