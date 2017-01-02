@@ -1,20 +1,13 @@
 Tickets\Domain\TicketEvent:
     type: entity
     table: TicketEvent
-    repositoryClass: Tickets\Infrastructure\Repository\Doctrine\TicketsEventRepository
     id:
         uuid:
             type: uuid
             generator:
                 strategy: NONE
     fields:
-        ticketUuid:
-            oneToOne:
-                ticketUuid:
-                  targetEntity: Ticket
-                  mappedBy: uuid
-                  type: uuid
-        status:
+        type:
             type: integer
         content:
             type: text
@@ -22,3 +15,10 @@ Tickets\Domain\TicketEvent:
             type: datetime
         files:
             type: array
+    manyToOne:
+        ticket:
+            targetEntity: Tickets\Domain\Ticket
+            inversedBy: events
+            joinColumn:
+                name: ticket_uuid
+                referencedColumnName: uuid

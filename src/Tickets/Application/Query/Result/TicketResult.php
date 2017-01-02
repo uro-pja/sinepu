@@ -4,6 +4,7 @@ namespace Tickets\Application\Query\Result;
 use DateTimeInterface;
 use Ramsey\Uuid\UuidInterface;
 use Tickets\Domain\Ticket;
+use Tickets\Domain\TicketEvent;
 
 class TicketResult
 {
@@ -27,18 +28,38 @@ class TicketResult
     public $createdAt;
 
     /**
+     * @var null|DateTimeInterface
+     */
+    public $updatedAt = null;
+
+    /**
+     * @var TicketEvent
+     */
+    public $ticketEvent;
+
+    /**
      * Templates constructor.
      * @param UuidInterface $uuid
      * @param string $type
-     * @param int $status
+     * @param string $status
      * @param DateTimeInterface $createdAt
+     * @param DateTimeInterface $updatedAt
+     * @param TicketEvent[]|array $ticketEvent
      */
-    public function __construct(UuidInterface $uuid, $type, $status, DateTimeInterface $createdAt)
-    {
+    public function __construct(
+        UuidInterface $uuid,
+        string $type,
+        string $status,
+        DateTimeInterface $createdAt,
+        DateTimeInterface $updatedAt = null,
+        $ticketEvent
+    ) {
         $this->type = $type;
         $this->status = $status;
         $this->createdAt = $createdAt;
+        $this->updatedAt = $updatedAt;
         $this->uuid = $uuid;
+        $this->ticketEvent = $ticketEvent;
     }
 
     /**
@@ -48,6 +69,13 @@ class TicketResult
      */
     public static function createFromTicket(Ticket $ticket)
     {
-        return new self($ticket->getUuid(), $ticket->getType(), 'not-implemented', $ticket->getCreatedAt());
+        return new self(
+            $ticket->getUuid(),
+            $ticket->getType(),
+            Ticket::TYPES[$ticket->getLastEvent()->getType()],
+            $ticket->getCreatedAt(),
+            $ticket->getLastEvent()->getCreatedAt(),
+            $ticket->getHistory()
+        );
     }
 }

@@ -12,3 +12,8 @@ Tickets\Domain\Ticket:
             type: string
         createdAt:
             type: datetime
+    oneToMany:
+        events:
+            targetEntity: Tickets\Domain\TicketEvent
+            mappedBy: ticket
+            cascade: ["all"]

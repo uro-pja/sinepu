@@ -88,11 +88,8 @@ class TicketsController extends Controller
     public function viewAction($uuid)
     {
         $ticket = $this->get('sinepu.query.tickets')->getTicket($uuid);
-        $ticketEvents = $this->get('sinepu.query.tickets_events')->findAllEventForTicket($uuid);
-
         return $this->render("tickets/TicketView.html.twig", [
             'ticket' => $ticket,
-            'ticketEvent' => $ticketEvents,
             'ticketUuid' => $uuid
         ]);
     }

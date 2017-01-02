@@ -2,8 +2,6 @@
 namespace Tickets\Application\Command;
 
 use Tickets\Domain\Ticket;
-use Tickets\Domain\TicketEvent;
-use Tickets\Domain\TicketEventInterface;
 use Tickets\Domain\Tickets;
 
 class CreateTicketHandler
@@ -12,19 +10,13 @@ class CreateTicketHandler
      * @var Tickets
      */
     private $ticketsRepository;
-    /**
-     * @var TicketEvent
-     */
-    private $ticketsEventRepository;
 
     /**
      * @param Tickets $ticketsRepository
-     * @param TicketEventInterface $ticketsEventRepository
      */
-    public function __construct(Tickets $ticketsRepository, TicketEventInterface $ticketsEventRepository)
+    public function __construct(Tickets $ticketsRepository)
     {
         $this->ticketsRepository = $ticketsRepository;
-        $this->ticketsEventRepository = $ticketsEventRepository;
     }
 
     /**
@@ -34,13 +26,11 @@ class CreateTicketHandler
     {
         $ticket = new Ticket(
             $command->ticketUuid,
-            $command->type
+            $command->type,
+            $command->content,
+            $command->files
         );
-        $ticketEvent = new TicketEvent($command->eventUuid, $command->ticketUuid, $command->status,
-            $command->content, $command->files);
 
         $this->ticketsRepository->insert($ticket);
-        $this->ticketsEventRepository->insert($ticketEvent);
-
     }
 }

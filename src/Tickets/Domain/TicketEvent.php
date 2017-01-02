@@ -1,32 +1,42 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: arsob
- * Date: 01/01/17
- * Time: 20:11
- */
-
 namespace Tickets\Domain;
-
 
 use DateTimeImmutable;
 use DateTimeInterface;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 class TicketEvent
 {
+    const TYPE_OPEN = '0';
+    const TYPE_CLOSED = '1';
+    const TYPE_REJECTED = '2';
+    const TYPE_ACCEPTED = '3';
+    const TYPE_AWAITING_FOR_ACCEPTATION = '4';
+
+    const TYPES = [
+        self::TYPE_OPEN => 'open',
+        self::TYPE_CLOSED => 'closed',
+        self::TYPE_REJECTED => 'rejected',
+        self::TYPE_ACCEPTED => 'accepted',
+        self::TYPE_AWAITING_FOR_ACCEPTATION => 'awaiting_for_acceptation'
+    ];
+
     /**
      * @var UuidInterface
      */
     private $uuid;
+
     /**
-     * @var UuidInterface
+     * @var Ticket
      */
-    private $ticketUuid;
+    private $ticket;
+
     /**
      * @var int
      */
-    private $status;
+    private $type;
+
     /**
      * @var string
      */
@@ -36,31 +46,27 @@ class TicketEvent
      * @var DateTimeInterface
      */
     private $createdAt;
+
     /**
      * @var array
      */
     private $files;
 
     /**
-     * TicketResponse constructor.
-     * @param UuidInterface $uuid
-     * @param UuidInterface $ticketUuid
-     * @param int $status
+     * @param Ticket $ticket
+     * @param int $type
      * @param string $content
      * @param array $files
      */
     public function __construct(
-        UuidInterface $uuid,
-        UuidInterface $ticketUuid,
-        int $status,
+        Ticket $ticket,
+        int $type,
         string $content,
         array $files
-    )
-    {
-
-        $this->uuid = $uuid;
-        $this->ticketUuid = $ticketUuid;
-        $this->status = $status;
+    ) {
+        $this->uuid = Uuid::uuid4();
+        $this->ticket = $ticket;
+        $this->type = $type;
         $this->content = $content;
         $this->createdAt = new DateTimeImmutable();
         $this->files = $files;
@@ -75,27 +81,11 @@ class TicketEvent
     }
 
     /**
-     * @return UuidInterface
-     */
-    public function getUuid(): UuidInterface
-    {
-        return $this->uuid;
-    }
-
-    /**
-     * @return UuidInterface
-     */
-    public function getTicketUuid(): UuidInterface
-    {
-        return $this->ticketUuid;
-    }
-
-    /**
      * @return int
      */
-    public function getStatus(): int
+    public function getType(): int
     {
-        return $this->status;
+        return $this->type;
     }
 
     /**
@@ -113,13 +103,4 @@ class TicketEvent
     {
         return $this->createdAt;
     }
-
-    /**
-     * @param UuidInterface $ticketUuid
-     */
-    public function setTicketUuid(UuidInterface $ticketUuid)
-    {
-        $this->ticketUuid = $ticketUuid;
-    }
-
 }
