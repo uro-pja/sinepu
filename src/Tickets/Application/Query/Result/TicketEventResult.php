@@ -13,7 +13,7 @@ class TicketEventResult
     public $uuid;
 
     /**
-     * @var string
+     * @var int
      */
     public $status;
 

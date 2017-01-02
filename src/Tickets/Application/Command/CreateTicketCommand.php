@@ -1,10 +1,10 @@
 <?php
-
 namespace Tickets\Application\Command;
 
 use DateTimeInterface;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use Tickets\Domain\TicketStatus;
 
 class CreateTicketCommand
 {
@@ -19,7 +19,7 @@ class CreateTicketCommand
     public $eventUuid;
 
     /**
-     * @var string
+     * @var Integer
      */
     public $status;
 
@@ -47,6 +47,7 @@ class CreateTicketCommand
     {
         $this->ticketUuid = Uuid::uuid4();
         $this->eventUuid = Uuid::uuid4();
-        $this->status = "open";
+        $TicketStatus = new TicketStatus();
+        $this->status = $TicketStatus->getTicketStatusIdByTag("open");
     }
 }

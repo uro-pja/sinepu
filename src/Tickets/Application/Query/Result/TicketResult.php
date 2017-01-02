@@ -17,7 +17,7 @@ class TicketResult
     public $type;
 
     /**
-     * @var string
+     * @var integer
      */
     public $status;
 
@@ -30,7 +30,7 @@ class TicketResult
      * Templates constructor.
      * @param UuidInterface $uuid
      * @param string $type
-     * @param string $status
+     * @param int $status
      * @param DateTimeInterface $createdAt
      */
     public function __construct(UuidInterface $uuid, $type, $status, DateTimeInterface $createdAt)

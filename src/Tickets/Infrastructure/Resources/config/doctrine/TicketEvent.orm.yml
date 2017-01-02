@@ -15,7 +15,7 @@ Tickets\Domain\TicketEvent:
                   mappedBy: uuid
                   type: uuid
         status:
-            type: string
+            type: integer
         content:
             type: text
         createdAt:

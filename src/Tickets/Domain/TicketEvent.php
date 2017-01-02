@@ -24,7 +24,7 @@ class TicketEvent
      */
     private $ticketUuid;
     /**
-     * @var string
+     * @var int
      */
     private $status;
     /**
@@ -45,14 +45,14 @@ class TicketEvent
      * TicketResponse constructor.
      * @param UuidInterface $uuid
      * @param UuidInterface $ticketUuid
-     * @param string $status
+     * @param int $status
      * @param string $content
      * @param array $files
      */
     public function __construct(
         UuidInterface $uuid,
         UuidInterface $ticketUuid,
-        string $status,
+        int $status,
         string $content,
         array $files
     )
@@ -91,9 +91,9 @@ class TicketEvent
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getStatus(): string
+    public function getStatus(): int
     {
         return $this->status;
     }
