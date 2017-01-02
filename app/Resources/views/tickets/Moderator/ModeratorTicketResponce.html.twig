@@ -1,0 +1,131 @@
+{% extends "base.html.twig" %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% block body %}
+    <h1>Podanie "{{ ticket.type }} "</h1>
+
+
+
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    Imie
+                </td>
+                <td>
+                    >imie<
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Nazwisko
+                </td>
+                <td>
+                    >nazwisko<
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Rok studiow
+                </td>
+                <td>
+                    >22222<
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Rok studiow
+                </td>
+                <td>
+                    22222
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    Status
+                </td>
+                <td>
+                    {{ ticket.status }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Data utwozenia
+                </td>
+                <td>
+                    29.10.2011
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Tresc
+                </td>
+                <td>
+                    {#{{ ticket.content }}#}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    {% for event in ticket.ticketEvent %}
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <td>
+                        Autor
+                    </td>
+                    <td>
+                        not-implemented
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Data odpowiedzi
+                    </td>
+                    <td>
+                        {{ event.createdAt | date }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Odpowiedz
+                    </td>
+                    <td>
+                        {{ event.content }}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+
+
+{% endblock %}
