@@ -4,6 +4,7 @@
 namespace Tickets\Application\Command;
 
 
+use DateTimeInterface;
 use Ramsey\Uuid\UuidInterface;
 
 class CreateTicketEventCommand
@@ -11,24 +12,32 @@ class CreateTicketEventCommand
     /**
      * @var UuidInterface
      */
-    private $uuid;
+    public $uuid;
+
     /**
      * @var UuidInterface
      */
-    private $ticketUuid;
+    public $ticketUuid;
+
     /**
      * @var string
      */
-    private $status;
+    public $status;
+
     /**
      * @var string
      */
-    private $content;
+    public $content;
+
+    /**
+     * @var array
+     */
+    public $files;
 
     /**
      * @var DateTimeInterface
      */
-    private $createdAt;
+    public $createdAt;
 
     /**
      * TicketResponse constructor.
@@ -36,14 +45,15 @@ class CreateTicketEventCommand
      * @param UuidInterface $ticketUuid
      * @param string $status
      * @param string $content
+     * @param array $files
      */
-    public function __construct(UuidInterface $uuid, UuidInterface $ticketUuid, string $status, string $content)
+    public function __construct(UuidInterface $uuid, UuidInterface $ticketUuid, string $status, string $content, array $files)
     {
-
         $this->uuid = $uuid;
         $this->ticketUuid = $ticketUuid;
         $this->status = $status;
         $this->content = $content;
+        $this->files = $files;
     }
 
 
