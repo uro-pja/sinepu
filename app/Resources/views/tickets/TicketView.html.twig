@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 {% block body %}
-    <h1>Podanie o  {{ ticket.type }}</h1>
+    <h1>Podanie "{{ ticket.type }}"</h1>
 
     <div class="table-responsive">
         <table class="table table-bordered">
@@ -34,26 +34,26 @@
             </tbody>
         </table>
     </div>
+    {% for event in ticketEvent %}
 
-
-    <div class="table-responsive">
+        <div class="table-responsive">
         <table class="table table-bordered">
             <tbody>
             <tr>
                 <td>
-                    Od
+                    Autor
                 </td>
                 <td>
-                    Jaana krzak
+                    not-implemented
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    Data utwozenia
+                    Data odpowiedzi
                 </td>
                 <td>
-                    29.10.2011
+                    {{ event.createdAt | date }}
                 </td>
             </tr>
             <tr>
@@ -61,21 +61,12 @@
                     Odpowiedz
                 </td>
                 <td>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed dapibus leo. Etiam vel eros
-                    commodo, ultricies ligula ac, vehicula lectus. Duis bibendum aliquam euismod. Vestibulum venenatis
-                    iaculis nisi eu iaculis. Maecenas placerat posuere dolor, dignissim accumsan eros rhoncus quis. Nunc
-                    id euismod elit. Aliquam at vestibulum justo. Donec laoreet odio quam, eu suscipit diam laoreet non.
+                    {{ event.content }}
                 </td>
             </tr>
-            <td>
-                Decyzja studenta
-            </td>
-            <td>
-                <button type="button" class="btn btn-success">Success</button>
-                <button type="button" class="btn btn-danger">Danger</button>
-            </td>
             </tbody>
         </table>
     </div>
+    {% endfor %}
 
 {% endblock %}

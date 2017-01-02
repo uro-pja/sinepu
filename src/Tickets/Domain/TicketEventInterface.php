@@ -12,11 +12,6 @@ interface TicketEventInterface
      */
     public function insert(TicketEvent $ticketEvent);
 
-    /**
-     * @param UuidInterface $uuid
-     *
-     * @return Ticket
-     */
     public function findAllEventForTicket(UuidInterface $uuid);
 
 }

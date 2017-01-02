@@ -13,6 +13,7 @@ Tickets\Domain\TicketEvent:
                 ticketUuid:
                   targetEntity: Ticket
                   mappedBy: uuid
+                  type: uuid
         status:
             type: string
         content:

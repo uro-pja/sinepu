@@ -1,5 +1,4 @@
 <?php
-
 namespace AppBundle\Controller;
 
 use AppBundle\Form\TicketTemplateForm;
@@ -19,7 +18,6 @@ class TicketsController extends Controller
     public function listAction()
     {
         $tickets = $this->get('sinepu.query.tickets')->getAll();
-
         return $this->render('tickets/TicketList.html.twig', [
             'tickets' => $tickets
         ]);
@@ -35,14 +33,10 @@ class TicketsController extends Controller
         $form = $this->createForm(TicketType::class);
         $form->handleRequest($request);
         $form->getData();
-
-
         if ($form->isValid()) {
             $this->get('sinepu.handler.create_ticket')->handle($form->getData());
-
             return $this->redirect($this->generateUrl("tickets_index"));
         }
-
         return $this->render('tickets/ticket_add.html.twig', [
             'form' => $form->createView()
         ]);
@@ -94,9 +88,12 @@ class TicketsController extends Controller
     public function viewAction($uuid)
     {
         $ticket = $this->get('sinepu.query.tickets')->getTicket($uuid);
+        $ticketEvents = $this->get('sinepu.query.tickets_events')->findAllEventForTicket($uuid);
 
         return $this->render("tickets/TicketView.html.twig", [
-            'ticket' => $ticket
+            'ticket' => $ticket,
+            'ticketEvent' => $ticketEvents,
+            'ticketUuid' => $uuid
         ]);
     }
 }

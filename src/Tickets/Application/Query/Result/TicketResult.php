@@ -1,5 +1,4 @@
 <?php
-
 namespace Tickets\Application\Query\Result;
 
 use DateTimeInterface;
@@ -26,8 +25,6 @@ class TicketResult
      * @var DateTimeInterface
      */
     public $createdAt;
-
-
 
     /**
      * Templates constructor.

@@ -114,5 +114,12 @@ class TicketEvent
         return $this->createdAt;
     }
 
+    /**
+     * @param UuidInterface $ticketUuid
+     */
+    public function setTicketUuid(UuidInterface $ticketUuid)
+    {
+        $this->ticketUuid = $ticketUuid;
+    }
 
 }

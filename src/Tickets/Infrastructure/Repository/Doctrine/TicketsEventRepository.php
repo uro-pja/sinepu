@@ -29,7 +29,7 @@ class TicketsEventRepository extends EntityRepository implements TicketEventInte
      */
     public function findAllEventForTicket(UuidInterface $uuid)
     {
-        $this->findBy(["ticketUuid" => $uuid]);
+        return $this->findBy(["ticketUuid" => $uuid->toString()]);
     }
 
 }

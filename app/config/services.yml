@@ -31,6 +31,12 @@ services:
         arguments:
           - "@sinepu.repository.tickets"
 
+    sinepu.query.tickets_events:
+        class: Tickets\Infrastructure\Query\TicketEventQuery
+        arguments:
+          - "@sinepu.repository.tickets_events"
+
+
     sinepu.handler.create_ticket:
         class: Tickets\Application\Command\CreateTicketHandler
         arguments:

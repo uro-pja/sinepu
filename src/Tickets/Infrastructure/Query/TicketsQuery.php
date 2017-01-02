@@ -1,9 +1,7 @@
 <?php
-
 namespace Tickets\Infrastructure\Query;
 
 use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 use Tickets\Application\Query\Result\TicketResult;
 use Tickets\Application\Query\Tickets;
 use Tickets\Domain\Exception\TicketNotFoundException;
@@ -45,11 +43,9 @@ class TicketsQuery implements Tickets
     public function getTicket(string $uuid)
     {
         $ticket = $this->tickets->findOneByUuid(Uuid::fromString($uuid));
-
         if ($ticket === null) {
             throw new TicketNotFoundException();
         }
-
         return TicketResult::createFromTicket($ticket);
     }
 }
