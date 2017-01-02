@@ -44,7 +44,7 @@ class TicketsTemplate
     /**
      * @return UuidInterface
      */
-    public function getUuid()
+    public function getUuid(): UuidInterface
     {
         return $this->uuid;
     }
@@ -52,7 +52,7 @@ class TicketsTemplate
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -60,7 +60,7 @@ class TicketsTemplate
     /**
      * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -68,7 +68,7 @@ class TicketsTemplate
     /**
      * @return string
      */
-    public function getAnnotations()
+    public function getAnnotations(): string
     {
         return $this->annotations;
     }

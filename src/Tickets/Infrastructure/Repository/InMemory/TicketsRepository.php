@@ -3,6 +3,7 @@
 namespace Tickets\Infrastructure\Repository\InMemory;
 
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Tickets\Domain\Exception\TicketNotFoundException;
 use Tickets\Domain\Ticket;
 use Tickets\Domain\Tickets;
@@ -22,13 +23,13 @@ class TicketsRepository implements Tickets
     }
 
     /**
-     * @param Uuid $uuid
+     * @param UuidInterface $uuid
      *
      * @return Ticket
      *
      * @throws TicketNotFoundException
      */
-    public function findOneByUuid(Uuid $uuid): Ticket
+    public function findOneByUuid(UuidInterface $uuid): Ticket
     {
         $ticket = $this->tickets[$uuid->toString()];
 

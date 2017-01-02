@@ -9,10 +9,11 @@
 namespace Tickets\Domain;
 
 
+use DateTimeImmutable;
 use DateTimeInterface;
 use Ramsey\Uuid\UuidInterface;
 
-class TicketResponse
+class TicketEvent
 {
     /**
      * @var UuidInterface
@@ -50,6 +51,8 @@ class TicketResponse
         $this->ticketUuid = $ticketUuid;
         $this->status = $status;
         $this->content = $content;
+        $this->createdAt = new DateTimeImmutable();
+
     }
 
     /**
@@ -91,7 +94,6 @@ class TicketResponse
     {
         return $this->createdAt;
     }
-
 
 
 }

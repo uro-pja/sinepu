@@ -11,7 +11,7 @@ namespace Tickets\Domain;
 
 use Ramsey\Uuid\UuidInterface;
 
-interface TicketResponseInterface
+interface TicketEventInterface
 {
     /**
      * @param Ticket $ticket
@@ -25,11 +25,7 @@ interface TicketResponseInterface
      *
      * @return Ticket
      */
-    public function findOneByUuid(UuidInterface $uuid);
+    public function findByUuidTicket(UuidInterface $uuid);
 
-    /**
-     * @return Ticket[]|array
-     */
-    public function findAll();
 
 }
