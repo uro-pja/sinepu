@@ -32,8 +32,7 @@ class CreateTicketTest extends FunctionalTestCase
         $this->assertEquals(1, count($tickets));
 
         $ticket = reset($tickets);
-
-        $this->assertEquals('beniz', $ticket->getContent());
+//        $this->assertEquals('beniz', $ticket->getContent());
         $this->assertEquals('second', $ticket->getType());
     }
 

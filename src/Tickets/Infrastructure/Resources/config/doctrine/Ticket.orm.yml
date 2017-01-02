@@ -8,15 +8,7 @@ Tickets\Domain\Ticket:
             generator:
                 strategy: NONE
     fields:
-        content:
-            type: text
         type:
             type: string
-        files:
-            type: array
-            nullable: true
         createdAt:
             type: datetime
-        updatedAt:
-            type: datetime
-            nullable: true

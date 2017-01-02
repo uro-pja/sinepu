@@ -34,6 +34,8 @@ class TicketsController extends Controller
     {
         $form = $this->createForm(TicketType::class);
         $form->handleRequest($request);
+        $form->getData();
+
 
         if ($form->isValid()) {
             $this->get('sinepu.handler.create_ticket')->handle($form->getData());

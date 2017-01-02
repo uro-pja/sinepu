@@ -1,38 +1,35 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: arsob
- * Date: 01/01/17
- * Time: 20:22
- */
-
 namespace Tickets\Infrastructure\Repository\Doctrine;
 
-
+use Doctrine\ORM\EntityRepository;
 use Ramsey\Uuid\UuidInterface;
-use Tickets\Domain\Ticket;
+use Tickets\Domain\TicketEvent;
 use Tickets\Domain\TicketEventInterface;
 
-class TicketsEventRepository implements TicketEventInterface
+class TicketsEventRepository extends EntityRepository implements TicketEventInterface
 {
 
     /**
-     * @param Ticket $ticket
+     * @param TicketEvent $ticketEvent
+     * @return bool
+     * @internal param Ticket $ticket
      *
-     * @return boolean
      */
-    public function insert(Ticket $ticket)
+    public function insert(TicketEvent $ticketEvent)
     {
-        // TODO: Implement insert() method.
+        $this->getEntityManager()->persist($ticketEvent);
+        $this->getEntityManager()->flush();
+        return true;
     }
 
     /**
      * @param UuidInterface $uuid
      *
-     * @return Ticket
+     * @return array
      */
-    public function findByUuidTicket(UuidInterface $uuid)
+    public function findAllEventForTicket(UuidInterface $uuid)
     {
-        // TODO: Implement findByUuidTicket() method.
+        $this->findBy(["ticketUuid" => $uuid]);
     }
+
 }

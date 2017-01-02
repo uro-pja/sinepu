@@ -1,33 +1,29 @@
 <?php
-
-
 namespace Tickets\Application\Command;
 
-
 use Tickets\Domain\TicketEvent;
+use Tickets\Domain\TicketEventInterface;
 
 class CreateTicketEventHandler
 {
-    /**
-     * @var TicketEvent
-     */
-    private $ticketEvent;
 
     /**
      * CreateTicketEventHandler constructor.
-     * @param TicketEvent $ticketEvent
+     * @param TicketEventInterface $ticketsEventRepository
      */
-    public function __construct(TicketEvent $ticketEvent)
+    public function __construct(TicketEventInterface $ticketsEventRepository)
     {
-
-        $this->ticketEvent = $ticketEvent;
+        $this->ticketsEventRepository = $ticketsEventRepository;
     }
 
-    public function handler(CreateTicketEventCommand $createTicketEventCommand)
+    /**
+     * @param CreateTicketEventCommand $eventCommand
+     */
+    public function handler(CreateTicketEventCommand $eventCommand)
     {
+        $ticketEvent = new TicketEvent($eventCommand->uuid, $eventCommand->ticketUuid, $eventCommand->status,
+            $eventCommand->content, $eventCommand->files);
+        $this->ticketsEventRepository->insert($ticketEvent);
 
-        $this->ticketEvent->getTicketUuid();
-        $this->ticketEvent->getCreatedAt();
-        $this->ticketEvent->getStatus();
     }
 }

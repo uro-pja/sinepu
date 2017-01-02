@@ -1,31 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: arsob
- * Date: 01/01/17
- * Time: 20:23
- */
-
 namespace Tickets\Domain;
-
 
 use Ramsey\Uuid\UuidInterface;
 
 interface TicketEventInterface
 {
     /**
-     * @param Ticket $ticket
+     * @param TicketEvent TicketEvent
      *
      * @return boolean
      */
-    public function insert(Ticket $ticket);
+    public function insert(TicketEvent $ticketEvent);
 
     /**
      * @param UuidInterface $uuid
      *
      * @return Ticket
      */
-    public function findByUuidTicket(UuidInterface $uuid);
-
+    public function findAllEventForTicket(UuidInterface $uuid);
 
 }

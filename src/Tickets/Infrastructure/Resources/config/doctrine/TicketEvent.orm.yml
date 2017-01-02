@@ -1,7 +1,7 @@
 Tickets\Domain\TicketEvent:
     type: entity
     table: TicketEvent
-    repositoryClass: Tickets\Infrastructure\Repository\Doctrine\TicketResponse
+    repositoryClass: Tickets\Infrastructure\Repository\Doctrine\TicketsEventRepository
     id:
         uuid:
             type: uuid
@@ -13,7 +13,11 @@ Tickets\Domain\TicketEvent:
                 ticketUuid:
                   targetEntity: Ticket
                   mappedBy: uuid
+        status:
+            type: string
         content:
             type: text
         createdAt:
             type: datetime
+        files:
+            type: array

@@ -27,16 +27,7 @@ class TicketResult
      */
     public $createdAt;
 
-    /**
-     * @var DateTimeInterface
-     */
-    public $updatedAt;
 
-    /**
-     * @var string
-     */
-
-    public $content;
 
     /**
      * Templates constructor.
@@ -44,17 +35,13 @@ class TicketResult
      * @param string $type
      * @param string $status
      * @param DateTimeInterface $createdAt
-     * @param DateTimeInterface $updatedAt
-     * @param $content
      */
-    public function __construct(UuidInterface $uuid, $type, $status, DateTimeInterface $createdAt, DateTimeInterface $updatedAt = null, $content)
+    public function __construct(UuidInterface $uuid, $type, $status, DateTimeInterface $createdAt)
     {
         $this->type = $type;
         $this->status = $status;
         $this->createdAt = $createdAt;
-        $this->updatedAt = $updatedAt;
         $this->uuid = $uuid;
-        $this->content = $content;
     }
 
     /**
@@ -64,6 +51,6 @@ class TicketResult
      */
     public static function createFromTicket(Ticket $ticket)
     {
-        return new self($ticket->getUuid(), $ticket->getType(), 'not-implemented', $ticket->getCreatedAt(), $ticket->getUpdatedAt(),$ticket->getContent());
+        return new self($ticket->getUuid(), $ticket->getType(), 'not-implemented', $ticket->getCreatedAt());
     }
 }

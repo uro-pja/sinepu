@@ -1,5 +1,4 @@
 <?php
-
 namespace Tickets\Infrastructure\Repository\Doctrine;
 
 use Doctrine\ORM\EntityRepository;
@@ -18,7 +17,6 @@ class TicketsRepository extends EntityRepository implements Tickets
     {
         $this->getEntityManager()->persist($ticket);
         $this->getEntityManager()->flush();
-
         return true;
     }
 
@@ -31,4 +29,5 @@ class TicketsRepository extends EntityRepository implements Tickets
     {
         return $this->findOneBy(['uuid' => $uuid]);
     }
+
 }

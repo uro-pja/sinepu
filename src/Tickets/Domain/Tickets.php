@@ -1,5 +1,4 @@
 <?php
-
 namespace Tickets\Domain;
 
 use Ramsey\Uuid\UuidInterface;
@@ -24,4 +23,5 @@ interface Tickets
      * @return Ticket[]|array
      */
     public function findAll();
+
 }

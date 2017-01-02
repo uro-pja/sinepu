@@ -16,17 +16,7 @@ class Ticket
     /**
      * @var string
      */
-    private $content;
-
-    /**
-     * @var string
-     */
     private $type;
-
-    /**
-     * @var array
-     */
-    private $files = [];
 
     /**
      * @var DateTimeInterface
@@ -34,50 +24,41 @@ class Ticket
     private $createdAt;
 
     /**
-     * @var DateTimeInterface|null
+     * Ticket constructor.
+     * @param UuidInterface $uuid
+     * @param string $type
      */
-    private $updatedAt = null;
-
-    public function __construct(UuidInterface $uuid, string $content, string $type, array $files = [])
+    public function __construct(UuidInterface $uuid, string $type)
     {
         $this->uuid = $uuid;
         $this->type = $type;
-        $this->files = $files;
-        $this->content = $content;
-
         $this->createdAt = new DateTimeImmutable();
     }
 
+    /**
+     * @return UuidInterface
+     */
     public function getUuid(): UuidInterface
     {
         return $this->uuid;
     }
 
+    /**
+     * @return string
+     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    public function getFiles(): array
-    {
-        return $this->files;
-    }
-
+    /**
+     * @return DateTimeInterface
+     */
     public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
-
     /**
      * @return DateTimeInterface|null
      */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    public function getContent(): string
-    {
-        return $this->content;
-    }
 }

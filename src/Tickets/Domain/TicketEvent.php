@@ -36,6 +36,10 @@ class TicketEvent
      * @var DateTimeInterface
      */
     private $createdAt;
+    /**
+     * @var array
+     */
+    private $files;
 
     /**
      * TicketResponse constructor.
@@ -43,8 +47,15 @@ class TicketEvent
      * @param UuidInterface $ticketUuid
      * @param string $status
      * @param string $content
+     * @param array $files
      */
-    public function __construct(UuidInterface $uuid, UuidInterface $ticketUuid, string $status, string $content)
+    public function __construct(
+        UuidInterface $uuid,
+        UuidInterface $ticketUuid,
+        string $status,
+        string $content,
+        array $files
+    )
     {
 
         $this->uuid = $uuid;
@@ -52,7 +63,15 @@ class TicketEvent
         $this->status = $status;
         $this->content = $content;
         $this->createdAt = new DateTimeImmutable();
+        $this->files = $files;
+    }
 
+    /**
+     * @return array
+     */
+    public function getFiles(): array
+    {
+        return $this->files;
     }
 
     /**

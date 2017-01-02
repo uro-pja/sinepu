@@ -1,8 +1,6 @@
 <?php
-
 namespace Tickets\Infrastructure\Repository\InMemory;
 
-use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 use Tickets\Domain\Exception\TicketNotFoundException;
 use Tickets\Domain\Ticket;
@@ -18,7 +16,6 @@ class TicketsRepository implements Tickets
     public function insert(Ticket $ticket): bool
     {
         $this->tickets[$ticket->getUuid()->toString()] = $ticket;
-
         return true;
     }
 
@@ -32,11 +29,9 @@ class TicketsRepository implements Tickets
     public function findOneByUuid(UuidInterface $uuid): Ticket
     {
         $ticket = $this->tickets[$uuid->toString()];
-
         if ($ticket === null) {
             throw new TicketNotFoundException();
         }
-
         return $ticket;
     }
 
