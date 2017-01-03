@@ -9,5 +9,5 @@ interface Tickets
     /**
      * @return TicketResult[]
      */
-    public function getAll();
+    public function findAll();
 }

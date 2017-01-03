@@ -1,0 +1,16 @@
+Tickets\Domain\TicketsTemplate:
+    type: entity
+    table: ticketsTemplate
+    repositoryClass: Tickets\Infrastructure\Repository\Doctrine\TicketsTemplatesRepository
+    id:
+        uuid:
+            type: uuid
+            generator:
+                strategy: NONE
+    fields:
+        name:
+            type: string
+        content:
+            type: string
+        annotations:
+            type: string

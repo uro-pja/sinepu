@@ -3,20 +3,20 @@
 namespace Tickets\Infrastructure\Query;
 
 use Tickets\Application\Query\Result\TicketResult;
-use Tickets\Application\Query\Templates;
-use Tickets\Domain\Tickets;
+use Tickets\Application\Query\Tickets;
+use Tickets\Domain\Tickets as TicketsRepository;
 
-class TicketsQuery implements Templates
+class TicketsQuery implements Tickets
 {
     /**
-     * @var Tickets
+     * @var TicketsRepository
      */
     private $tickets;
 
     /**
-     * @param Tickets $tickets
+     * @param TicketsRepository $tickets
      */
-    public function __construct(Tickets $tickets)
+    public function __construct(TicketsRepository $tickets)
     {
         $this->tickets = $tickets;
     }
@@ -24,15 +24,13 @@ class TicketsQuery implements Templates
     /**
      * @return TicketResult[]
      */
-    public function getAll()
+    public function findAll()
     {
         $tickets = $this->tickets->findAll();
-
         $data = [];
         foreach ($tickets as $ticket) {
             $data[] = TicketResult::createFromTicket($ticket);
         }
-
         return $data;
     }
 }

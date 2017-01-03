@@ -2,11 +2,13 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\TicketTemplateForm;
 use AppBundle\Form\TicketType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
+
 use Symfony\Component\HttpFoundation\Request;
+use Tickets\Domain\Exception\TicketTemplateAlreadyExistException;
 
 class TicketsController extends Controller
 {
@@ -17,7 +19,7 @@ class TicketsController extends Controller
      */
     public function listAction(Request $request)
     {
-        $tickets = $this->container->get('sinepu.query.tickets')->getAll();
+        $tickets = $this->get('sinepu.query.tickets')->findAll();
 
         return $this->render('tickets/TicketList.html.twig', [
             'tickets' => $tickets
@@ -58,15 +60,28 @@ class TicketsController extends Controller
 
     /**
      * @param Request $request
-     * @Route("/tickets/templates", name="tickets_templates", methods={"GET"})
+     * @Route("/admin/tickets/templates", name="tickets_templates", methods={"GET","POST"})
      *
-     * @return JsonResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function templatesAction(Request $request)
+    public function templatesListAndAdd(Request $request)
     {
-        $templates = $this->get('sinepu.query.ticket_templates')->getAll();
-
-        return new JsonResponse($templates);
+        $form = $this->createForm(TicketTemplateForm::class);
+        $form->handleRequest($request);
+        $errors = [];
+        if ($form->isValid()) {
+            try {
+                $this->get('sinepu.handler.create_ticket_type')->handle($form->getData());
+            } catch (TicketTemplateAlreadyExistException $e) {
+                $errors = [ "name" => "Nazwa Zajeta"];
+            }
+        }
+        $templates = $this->get('sinepu.query.ticket_templates')->findAll();
+        return $this->render('tickets/TicketTemplate.html.twig', [
+            'form' => $form->createView(),
+            'ticketTemplates' => $templates,
+            'error' => $errors
+        ]);
     }
 
     /**
@@ -76,7 +91,7 @@ class TicketsController extends Controller
      */
     public function viewAction(Request $request)
     {
-        $ticketRepository = $this->container->get('sinepu.repository.tickets');
+        $ticketRepository = $this->get('sinepu.repository.tickets');
 
         return $this->render("tickets/TicketView.html.twig", [
             'tickets' => $ticketRepository->findAll()

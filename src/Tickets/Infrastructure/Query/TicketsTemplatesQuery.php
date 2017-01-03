@@ -4,31 +4,31 @@ namespace Tickets\Infrastructure\Query;
 
 use Tickets\Application\Query\Result\TemplateResult;
 use Tickets\Application\Query\Templates;
-use Tickets\Domain\TicketTemplates;
+use Tickets\Domain\TicketsTemplates;
 
-class TemplatesQuery implements Templates
+class TicketsTemplatesQuery implements Templates
 {
     /**
-     * @var TicketTemplates
+     * @var TicketsTemplates
      */
-    private $ticketTemplates;
+    private $ticketsTemplates;
+
 
     /**
-     * TemplatesQuery constructor.
-     *
-     * @param TicketTemplates $ticketTemplates
+     * TicketsTemplatesQuery constructor.
+     * @param TicketsTemplates $ticketsTemplates
      */
-    public function __construct(TicketTemplates $ticketTemplates)
+    public function __construct(TicketsTemplates $ticketsTemplates)
     {
-        $this->ticketTemplates = $ticketTemplates;
+        $this->ticketsTemplates = $ticketsTemplates;
     }
 
     /**
      * @return TemplateResult[]
      */
-    public function getAll()
+    public function findAll()
     {
-        $tickets = $this->ticketTemplates->findAll();
+        $tickets = $this->ticketsTemplates->findAll();
 
         $data = [];
         foreach ($tickets as $ticket) {
@@ -37,15 +37,20 @@ class TemplatesQuery implements Templates
 
         return $data;
     }
+
+    /**
+     * @return TemplateResult[]
+     */
     public function getNames()
     {
-        $tickets = $this->ticketTemplates->findAll();
+        $tickets = $this->ticketsTemplates->findAll();
 
         $data = [];
         foreach ($tickets as $ticket) {
             $data[] = TemplateResult::createFromTicketTemplate($ticket);
         }
         var_dump($data);
+        return $data;
 
     }
 }

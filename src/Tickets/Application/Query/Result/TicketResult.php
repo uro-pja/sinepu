@@ -4,7 +4,7 @@ namespace Tickets\Application\Query\Result;
 
 use DateTimeInterface;
 use Tickets\Domain\Ticket;
-use Tickets\Domain\TicketTemplate;
+use Tickets\Domain\TicketsTemplate;
 
 class TicketResult
 {

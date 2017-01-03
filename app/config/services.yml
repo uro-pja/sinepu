@@ -4,7 +4,11 @@ parameters:
 
 services:
     sinepu.repository.tickets_templates:
-        class: Tickets\Infrastructure\Repository\InMemory\TicketTemplatesRepository
+        class: Tickets\Infrastructure\Repository\Doctrine\TicketsTemplatesRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+            - 'Tickets\Domain\TicketsTemplate'
+
 
     sinepu.repository.tickets:
         class: Tickets\Infrastructure\Repository\Doctrine\TicketsRepository
@@ -13,7 +17,7 @@ services:
             - 'Tickets\Domain\Ticket'
 
     sinepu.query.ticket_templates:
-        class: Tickets\Infrastructure\Query\TemplatesQuery
+        class: Tickets\Infrastructure\Query\TicketsTemplatesQuery
         arguments:
           - "@sinepu.repository.tickets_templates"
 
@@ -30,6 +34,17 @@ services:
     bundle.form.ticket_type:
         class: AppBundle\Form\TicketType
         arguments:
-          - '@sinepu.repository.tickets_templates'
+          - '@sinepu.query.ticket_templates'
         tags:
           - {name: form.type}
+
+    bundle.form.ticket_template_type:
+        class: AppBundle\Form\TicketTemplateForm
+
+    sinepu.handler.create_ticket_type:
+        class: Tickets\Application\Command\CreateTicketTemplateHandler
+        arguments:
+          - '@sinepu.repository.tickets_templates'
+
+    sinepu.handler.create_ticket_type_command:
+        class: Tickets\Application\Command\CreateTicketTemplateCommand

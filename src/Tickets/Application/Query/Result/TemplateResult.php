@@ -2,10 +2,16 @@
 
 namespace Tickets\Application\Query\Result;
 
-use Tickets\Domain\TicketTemplate;
+use Ramsey\Uuid\UuidInterface;
+use Tickets\Domain\TicketsTemplate;
 
 class TemplateResult
 {
+    /**
+     * @var UuidInterface
+     */
+    public $uuid;
+
     /**
      * @var string
      */
@@ -26,21 +32,23 @@ class TemplateResult
      * @param string $name
      * @param string $content
      * @param string $annotations
+     * @param UuidInterface $uuid
      */
-    public function __construct($name, $content, $annotations)
+    public function __construct(UuidInterface $uuid, $name, $content, $annotations)
     {
         $this->name = $name;
         $this->content = $content;
         $this->annotations = $annotations;
+        $this->uuid = $uuid;
     }
 
     /**
-     * @param TicketTemplate $ticketTemplate
+     * @param TicketsTemplate $ticketTemplate
      *
      * @return TemplateResult
      */
-    public static function createFromTicketTemplate(TicketTemplate $ticketTemplate)
+    public static function createFromTicketTemplate(TicketsTemplate $ticketTemplate)
     {
-        return new self($ticketTemplate->getName(), $ticketTemplate->getContent(), $ticketTemplate->getAnnotations());
+        return new self($ticketTemplate->getUuid(), $ticketTemplate->getName(), $ticketTemplate->getContent(), $ticketTemplate->getAnnotations());
     }
 }
