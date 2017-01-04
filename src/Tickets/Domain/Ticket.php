@@ -74,6 +74,12 @@ class Ticket
         return $this->createdAt;
     }
 
+    public function addTicker(TicketEvent $ticketEvent)
+    {
+        $this->events[] = $ticketEvent;
+    }
+
+
     /**
      * @return TicketEvent
      */

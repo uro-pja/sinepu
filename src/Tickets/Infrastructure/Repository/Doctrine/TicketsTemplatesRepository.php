@@ -12,10 +12,11 @@ class TicketsTemplatesRepository extends EntityRepository implements TicketsTemp
      * @param TicketsTemplate $ticketTemplate
      *
      * @return boolean
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
      */
     public function insert(TicketsTemplate $ticketTemplate)
     {
-        // TODO: Implement insert() method.
         $this->getEntityManager()->persist($ticketTemplate);
         $this->getEntityManager()->flush();
 

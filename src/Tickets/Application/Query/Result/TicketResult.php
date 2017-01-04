@@ -8,6 +8,16 @@ use Tickets\Domain\TicketEvent;
 
 class TicketResult
 {
+    const CSS = [
+        'closed' => 'label-default',
+        'open' => 'label-primary',
+        'accepted' => 'label-success',
+        '' => 'label-info',
+        'awaiting_for_acceptation' => 'label-warning',
+        'rejected' => 'label-danger'
+    ];
+
+
     /**
      * @var UuidInterface
      */
@@ -21,6 +31,11 @@ class TicketResult
      * @var integer
      */
     public $status;
+
+    /**
+     * @var string
+     */
+    public $statusBootstrap;
 
     /**
      * @var DateTimeInterface
@@ -45,6 +60,7 @@ class TicketResult
      * @param DateTimeInterface $createdAt
      * @param DateTimeInterface $updatedAt
      * @param TicketEvent[]|array $ticketEvent
+     * @param $statusBootstrap
      */
     public function __construct(
         UuidInterface $uuid,
@@ -52,14 +68,17 @@ class TicketResult
         string $status,
         DateTimeInterface $createdAt,
         DateTimeInterface $updatedAt = null,
-        $ticketEvent
-    ) {
+        $ticketEvent,
+        $statusBootstrap
+    )
+    {
         $this->type = $type;
         $this->status = $status;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
         $this->uuid = $uuid;
         $this->ticketEvent = $ticketEvent;
+        $this->statusBootstrap = $statusBootstrap;
     }
 
     /**
@@ -75,7 +94,8 @@ class TicketResult
             Ticket::TYPES[$ticket->getLastEvent()->getType()],
             $ticket->getCreatedAt(),
             $ticket->getLastEvent()->getCreatedAt(),
-            $ticket->getHistory()
+            $ticket->getHistory(),
+            TicketResult::CSS[Ticket::TYPES[$ticket->getLastEvent()->getType()]]
         );
     }
 }

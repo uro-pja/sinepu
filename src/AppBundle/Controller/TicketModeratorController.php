@@ -24,13 +24,21 @@ class TicketModeratorController extends Controller
     /**
      * @param $uuid
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/moderator/tickets/view/{uuid}", name="moderator_ticket_view", methods={"GET"})
+     * @throws \Tickets\Domain\Exception\TicketNotFoundException
+     * @Route("/moderator/tickets/view/{uuid}", name="moderator_ticket_view", methods={"GET","POST"})
      */
     public function viewAction($uuid)
     {
         $form = $this->createForm(ModeratorTicketUpdateForm::class);
+
         $ticket = $this->get('sinepu.query.tickets')->getTicket($uuid);
-        return $this->render("tickets/Moderator/ModeratorTicketResponce.html.twig", [
+
+//        if ($form->isValid()) {
+            $this->get('sinepu.handler.update_ticket')->handle($form->getData());
+//            return $this->redirect($this->generateUrl("tickets_index"));
+//        }
+
+        return $this->render('tickets/Moderator/ModeratorTicketResponse.html.twig', [
             'ticket' => $ticket,
             'ticketUuid' => $uuid,
             'form' => $form->createView()
@@ -47,7 +55,6 @@ class TicketModeratorController extends Controller
         /**
          *
          */
-
     }
 
 }

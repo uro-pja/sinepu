@@ -4,9 +4,6 @@
 {% block body %}
     <h1>Podanie "{{ ticket.type }} "</h1>
 
-
-
-
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
@@ -47,13 +44,6 @@
             </tbody>
         </table>
     </div>
-
-
-
-
-
-
-
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
@@ -64,7 +54,7 @@
                     Status
                 </td>
                 <td>
-                    {{ ticket.status }}
+                    <span class="label {{ ticket.statusBootstrap }}">{{ ticket.status }}</span>
                 </td>
             </tr>
             <tr>
@@ -73,14 +63,6 @@
                 </td>
                 <td>
                     29.10.2011
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Tresc
-                </td>
-                <td>
-                    {#{{ ticket.content }}#}
                 </td>
             </tr>
             </tbody>

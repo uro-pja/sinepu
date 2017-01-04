@@ -12,6 +12,8 @@ class TicketsRepository extends EntityRepository implements Tickets
      * @param Ticket $ticket
      *
      * @return boolean
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
      */
     public function insert(Ticket $ticket)
     {

@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Tickets\Application\Command\UpdateTicketCommand;
 use Tickets\Domain\TicketEvent;
 
 class ModeratorTicketUpdateForm extends AbstractType
@@ -42,8 +43,8 @@ class ModeratorTicketUpdateForm extends AbstractType
 
     public function configureOptions(OptionsResolver $optionsResolver)
     {
-//        $optionsResolver->setDefaults([
-//            'data_class' => ::class
-//        ]);
+        $optionsResolver->setDefaults([
+            'data_class' => UpdateTicketCommand::class
+        ]);
     }
 }

@@ -25,7 +25,10 @@
                     <td>{{ ticket.type }}</td>
                     <td>{{ ticket.createdAt|date }}</td>
                     <td>{{ ticket.updatedAt|date }}</td>
-                    <td>{{ ticket.status }}</td>
+
+
+                    <td><span class="label {{ ticket.statusBootstrap }}">{{ ticket.status }}</span></td>
+
                     <td>
                         <a class="btn btn-info" href="{{ path("moderator_ticket_view",{'uuid':ticket.uuid }  ) }}"
                            role="button">Szczegoly</a>
