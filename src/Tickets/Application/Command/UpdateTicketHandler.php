@@ -13,9 +13,8 @@ class UpdateTicketHandler
 
     /**
      * @param Tickets $ticketsRepository
-     * @param TicketEvent $ticketEvent
      */
-    public function __construct(Tickets $ticketsRepository, TicketEvent $ticketEvent)
+    public function __construct(Tickets $ticketsRepository)
     {
         $this->ticketsRepository = $ticketsRepository;
     }
@@ -46,6 +45,6 @@ class UpdateTicketHandler
         }
 
         $ticket->addTicker($event);
-        $this->ticketsRepository->insert($ticket);
+        $this->ticketsRepository->update($ticket);
     }
 }

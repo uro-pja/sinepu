@@ -32,4 +32,16 @@ class TicketsRepository extends EntityRepository implements Tickets
         return $this->findOneBy(['uuid' => $uuid]);
     }
 
+    /**
+     * @param Ticket $ticket
+     * @return mixed
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
+     */
+    public function update(Ticket $ticket)
+    {
+        $this->getEntityManager()->persist($ticket);
+        $this->getEntityManager()->flush();
+    }
+
 }

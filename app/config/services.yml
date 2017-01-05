@@ -37,6 +37,10 @@ services:
           - "@sinepu.repository.tickets_events"
 
 
+
+
+
+
     sinepu.handler.create_ticket:
         class: Tickets\Application\Command\CreateTicketHandler
         arguments:
@@ -60,3 +64,9 @@ services:
 
     sinepu.handler.create_ticket_type_command:
         class: Tickets\Application\Command\CreateTicketTemplateCommand
+
+    sinepu.handler.update_ticket:
+        class: Tickets\Application\Command\UpdateTicketHandler
+        arguments:
+          - '@sinepu.repository.tickets'
+

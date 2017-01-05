@@ -33,10 +33,9 @@ class TicketModeratorController extends Controller
 
         $ticket = $this->get('sinepu.query.tickets')->getTicket($uuid);
 
-//        if ($form->isValid()) {
+    if ($form->isValid()) {
             $this->get('sinepu.handler.update_ticket')->handle($form->getData());
-//            return $this->redirect($this->generateUrl("tickets_index"));
-//        }
+        }
 
         return $this->render('tickets/Moderator/ModeratorTicketResponse.html.twig', [
             'ticket' => $ticket,

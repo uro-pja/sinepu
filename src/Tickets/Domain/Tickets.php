@@ -12,6 +12,13 @@ interface Tickets
      */
     public function insert(Ticket $ticket);
 
+
+    /**
+     * @param Ticket $ticket
+     * @return mixed
+     */
+    public function update(Ticket $ticket);
+
     /**
      * @param UuidInterface $uuid
      *

@@ -23,15 +23,7 @@ class TicketsTemplatesRepository extends EntityRepository implements TicketsTemp
         return true;
     }
 
-    /**
-     * @param TicketsTemplate $ticketTemplate
-     *
-     * @return boolean
-     */
-    public function update(TicketsTemplate $ticketTemplate)
-    {
-        // TODO: Implement update() method.
-    }
+
 
     public function remove(TicketsTemplate $ticketsTemplate)
     {
@@ -46,5 +38,15 @@ class TicketsTemplatesRepository extends EntityRepository implements TicketsTemp
     public function existWithName($name)
     {
         return (bool)$this->findOneBy(['name' => $name]);
+    }
+
+    /**
+     * @param TicketsTemplate $ticketTemplate
+     *
+     * @return boolean
+     */
+    public function update(TicketsTemplate $ticketTemplate)
+    {
+        // TODO: Implement update() method.
     }
 }

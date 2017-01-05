@@ -49,7 +49,6 @@ class TicketsTemplatesQuery implements Templates
         foreach ($tickets as $ticket) {
             $data[] = TemplateResult::createFromTicketTemplate($ticket);
         }
-        var_dump($data);
         return $data;
 
     }
