@@ -48,4 +48,20 @@ class TicketsQuery implements Tickets
         }
         return TicketResult::createFromTicket($ticket);
     }
+
+    /**
+     * @param String $status
+     * @return array
+     */
+    public function getTicketListWithStatus(String $status)
+    {
+        $tickets = $this->tickets->findAllWithStatus($status);
+        $data = [];
+        foreach ($tickets as $ticket) {
+            $data[] = TicketResult::createFromTicket($ticket);
+        }
+        return $data;
+    }
+
+
 }

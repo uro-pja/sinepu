@@ -44,4 +44,9 @@ class TicketsRepository extends EntityRepository implements Tickets
         $this->getEntityManager()->flush();
     }
 
+    public function findAllWithStatus(String $status)
+    {
+        return $this->findBy(["status"=>$status]);
+
+    }
 }

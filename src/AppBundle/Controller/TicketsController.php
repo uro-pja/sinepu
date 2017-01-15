@@ -1,12 +1,11 @@
 <?php
 namespace AppBundle\Controller;
 
-use AppBundle\Form\TicketTemplateForm;
 use AppBundle\Form\TicketType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Tickets\Domain\Exception\TicketTemplateAlreadyExistException;
+use Tickets\Application\Command\UpdateTicketCommand;
 
 class TicketsController extends Controller
 {
@@ -43,43 +42,6 @@ class TicketsController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @Route("/tickets/{uuid}/update",methods={"POST"})
-     */
-    public function updateStatusAction(Request $request)
-    {
-        /**
-         * W
-         */
-    }
-
-    /**
-     * @param Request $request
-     * @Route("/admin/tickets/templates", name="tickets_templates", methods={"GET","POST"})
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function templatesListAndAdd(Request $request)
-    {
-        $form = $this->createForm(TicketTemplateForm::class);
-        $form->handleRequest($request);
-        $errors = [];
-        if ($form->isValid()) {
-            try {
-                $this->get('sinepu.handler.create_ticket_type')->handle($form->getData());
-            } catch (TicketTemplateAlreadyExistException $e) {
-                $errors = ["name" => "Nazwa Zajeta"];
-            }
-        }
-        $templates = $this->get('sinepu.query.ticket_templates')->getAll();
-        return $this->render('tickets/TicketTemplate.html.twig', [
-            'form' => $form->createView(),
-            'ticketTemplates' => $templates,
-            'error' => $errors
-        ]);
-    }
-
-    /**
      * @param string $uuid
      * @return \Symfony\Component\HttpFoundation\Response
      * @internal param Request $request
@@ -93,4 +55,29 @@ class TicketsController extends Controller
             'ticketUuid' => $uuid
         ]);
     }
+
+    /**
+     * @param string $uuid
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @internal param Request $request
+     * @Route("/tickets/{uuid}/close", name="tickets_action_close", methods={"POST"})
+     */
+    public function closeAction(string $uuid)
+    {
+        $command = new UpdateTicketCommand();
+//        $command->content
+        $this->get("sinepu.handler.update_ticket")->closeTicket($command);
+    }
+
+    /**
+     * @param string $uuid
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @internal param Request $request
+     * @Route("/tickets/{uuid}/reject", name="tickets_action_reject", methods={"POST"})
+     */
+    public function rejectAction(string $uuid)
+    {
+
+    }
+
 }

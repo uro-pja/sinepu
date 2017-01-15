@@ -2,10 +2,11 @@
 {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
 
 {% block body %}
-    <h1>Podanie "{{ ticket.type }} "</h1>
+    <h1>Podanie "{{ ticket.type }} " Status <span class="label {{ ticket.statusBootstrap }}">{{ ticket.status }}</span>
+    </h1>
 
-    <div class="table-responsive">
-        <table class="table table-bordered">
+    <div class="table-responsive ">
+        <table class="table borderless">
             <thead>
             </thead>
             <tbody>
@@ -44,34 +45,11 @@
             </tbody>
         </table>
     </div>
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <thead>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    Status
-                </td>
-                <td>
-                    <span class="label {{ ticket.statusBootstrap }}">{{ ticket.status }}</span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Data utwozenia
-                </td>
-                <td>
-                    29.10.2011
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+
     {% for event in ticket.ticketEvent %}
 
         <div class="table-responsive">
-            <table class="table table-bordered">
+            <table class="table borderless">
                 <tbody>
                 <tr>
                     <td>

@@ -36,6 +36,12 @@ class Ticket
     private $events = [];
 
     /**
+     * @var TicketEvent[]|array
+     */
+    private $status;
+
+
+    /**
      * Ticket constructor.
      * @param UuidInterface $uuid
      * @param string $type
@@ -48,6 +54,7 @@ class Ticket
         $this->type = $type;
         $this->createdAt = new DateTimeImmutable();
         $this->events[] = new TicketEvent($this, TicketEvent::TYPE_OPEN, $content, $files);
+        $this->status = TicketEvent::TYPE_OPEN;
     }
 
     /**
@@ -111,8 +118,14 @@ class Ticket
     public function reject(string $reason, array $files = [])
     {
         $this->events[] = new TicketEvent($this, TicketEvent::TYPE_REJECTED, $reason, $files);
+        $this->status = TicketEvent::TYPE_REJECTED;
     }
 
+    /**
+     * @param string $who
+     * @param string $reason
+     * @param array $files
+     */
     public function accept(string $who, string $reason, array $files = [])
     {
         if ($who === 'student') {
@@ -122,8 +135,27 @@ class Ticket
         }
     }
 
-    public function forwardTo(string $reason, array $files = [])
+//    public function forwardTo(string $reason, array $files = [])
+//    {
+//        $this->events[] = new TicketEvent($this, TicketEvent::TYPE_REJECTED, $reason, $files);
+//    }
+
+    /**
+     * @param string $reason
+     * @param array $files
+     */
+    public function close(string $reason, array $files = [])
     {
-        $this->events[] = new TicketEvent(TicketEvent::TYPE_REJECTED, $reason, $files);
+        $this->events[] = new TicketEvent($this, TicketEvent::TYPE_CLOSED, $reason, $files);
+        $this->status = TicketEvent::TYPE_CLOSED;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
     }
 }

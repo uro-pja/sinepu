@@ -6,36 +6,43 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Intl\Data\Util\ArrayAccessibleResourceBundle;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Tickets\Application\Command\UpdateTicketCommand;
 use Tickets\Domain\TicketEvent;
 
-class ModeratorTicketUpdateForm extends AbstractType
+class ModeratorTicketAnalise  extends AbstractType
 {
     public function buildForm(FormBuilderInterface $formBuilder, array $option)
     {
         $formBuilder
-            ->add('type', ChoiceType::class, [
-                'choices' => $this->getTicketStatusType(),
-                'label' => 'Zmien Status',
-                'required' => true
-            ])
             ->add('content', TextareaType::class, [
                 'label' => 'Komentaz'
             ])
             ->add('save', SubmitType::class, [
                     'label' => 'Wyslij',
                 ]
-            );
+            ) ->add('status', SubmitType::class,['label'=> "Zaakceptuj",])
+
+        ;
+
+        
+        foreach ($this->getTicketStatusType() as  $type ){
+            $formBuilder ->add('status', SubmitType::class,['label' => $type["key"]]);
+
+        }
+
+
+
     }
 
-    public function getTicketStatusType()
+    public function getTicketStatusType(): array
     {
         $types = [
-            "Odrzuc" => TicketEvent::TYPES[TicketEvent::TYPE_REJECTED],
-            "Akceptuj" => TicketEvent::TYPES[TicketEvent::TYPE_AWAITING_FOR_ACCEPTATION],
-            "Otwarte" => TicketEvent::TYPES[TicketEvent::TYPE_OPEN],
-            "Zamknij jako zrealizowane" => TicketEvent::TYPES[TicketEvent::TYPE_CLOSED],
+            ["key" => "Odrzuc", "value"  => TicketEvent::TYPE_REJECTED , "css_clas"],
+            ["key" => "Akceptuj", "value"=> TicketEvent::TYPE_AWAITING_FOR_ACCEPTATION],
+            ["key" => "Otwarte", "value"=> TicketEvent::TYPE_OPEN],
+            ["key" => "Zamknij jako zrealizowane", "value" => TicketEvent::TYPE_CLOSED],
         ];
         return $types;
 

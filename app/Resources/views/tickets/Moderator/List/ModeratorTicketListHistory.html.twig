@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block page_title %}Historia Podan{% endblock %}
+
+{% block body %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Typ Podania</th>
+                <th>nr indexu</th>
+                <th>Imie i Nazwisko</th>
+                <th>Data zlozenia podania</th>
+                <th>Data ostatniej aktualizacji</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for ticket in tickets %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>Janusz test</td>
+                    <td>66666</td>
+                    <td>{{ ticket.type }}</td>
+                    <td>{{ ticket.createdAt|date }}</td>
+                    <td>{{ ticket.updatedAt|date }}</td>
+                    <td>
+                        <a class="btn btn-info" href="{{ path("moderator_ticket_view",{'uuid':ticket.uuid }  ) }}"
+                           role="button">Szczegoly</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

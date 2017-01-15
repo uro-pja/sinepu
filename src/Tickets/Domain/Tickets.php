@@ -31,4 +31,6 @@ interface Tickets
      */
     public function findAll();
 
+    public function findAllWithStatus(String $status);
 }
+

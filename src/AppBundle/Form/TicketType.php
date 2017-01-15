@@ -34,7 +34,8 @@ class TicketType extends AbstractType
             ->add('type', ChoiceType::class, [
                 'choices' => $this->getTemplatesChoiceList(),
                 'label' => 'Typ podania',
-                'required' => true
+                'required' => true,
+                'expanded' => true
             ])
             ->add('content', TextareaType::class, [
                 'label' => 'Tresc podania!',

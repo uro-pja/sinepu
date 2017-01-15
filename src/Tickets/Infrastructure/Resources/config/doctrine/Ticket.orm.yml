@@ -12,6 +12,8 @@ Tickets\Domain\Ticket:
             type: string
         createdAt:
             type: datetime
+        status:
+            type: string
     oneToMany:
         events:
             targetEntity: Tickets\Domain\TicketEvent
