@@ -89,8 +89,10 @@ class TicketModeratorController extends Controller
     {
         $form = $this->createForm(ModeratorTicketAnalise::class);
         $ticket = $this->get('sinepu.query.tickets')->getTicket($uuid);
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
+            $form->get('status')->setData($form->getClickedButton());
             $this->get('sinepu.handler.update_ticket')->handle($form->getData());
+
         }
         return $this->render('tickets/Moderator/View/ModeratorTicketAwaitingToAnalise.html.twig', [
             'ticket' => $ticket,
