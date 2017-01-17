@@ -1,5 +1,4 @@
 <?php
-
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -41,13 +40,16 @@ class TicketType extends AbstractType
                 'label' => 'Tresc podania!',
             ])
             ->add('files', FileType::class,
-                ['label' => "Zalacznik",
+                [
+                    'label' => "Zalacznik",
                     'required' => false,
                     'multiple' => true,
                 ])
-
             ->add('save', SubmitType::class, [
                     'label' => 'Wyslij',
+                    'attr' => [
+                        'class' => 'btn-success btn-lg'
+                    ]
                 ]
             );
 
@@ -58,13 +60,11 @@ class TicketType extends AbstractType
      */
     private function getTemplatesChoiceList()
     {
-
         $templates = $this->templates->getAll();
         $data = [];
         foreach ($templates as $template) {
             $data[$template->name] = $template->name;
         }
-
         return $data;
     }
 

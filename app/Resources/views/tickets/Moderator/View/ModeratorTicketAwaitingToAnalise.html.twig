@@ -42,15 +42,9 @@
                     22222
                 </td>
             </tr>
-            </tbody>
-        </table>
-    </div>
 
-    {% for event in ticket.ticketEvent %}
+            {% for event in ticket.ticketEvent %}
 
-        <div class="table-responsive">
-            <table class="table borderless">
-                <tbody>
                 <tr>
                     <td>
                         Autor
@@ -70,22 +64,28 @@
                 </tr>
                 <tr>
                     <td>
-                        Odpowiedz
-                    </td>
+                        Tresc
+
                     <td>
                         {{ event.content }}
                     </td>
                 </tr>
-                </tbody>
-            </table>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-12">
+
+        {{ form_start(form) }}
+        {{ form(form.content) }}
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            {{ form_widget(form.awaiting_for_acceptation) }}
+            {{ form_widget(form.rejected) }}
+            {{ form_widget(form.closed) }}
         </div>
-    {% endfor %}
-
-
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
-
-
-
+        <div class="col-md-6"></div>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}

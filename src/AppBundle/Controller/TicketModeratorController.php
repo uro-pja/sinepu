@@ -1,7 +1,7 @@
 <?php
 namespace AppBundle\Controller;
 
-use AppBundle\Form\ModeratorTicketUpdateForm;
+use AppBundle\Form\ModeratorTicketAnalise;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,7 +49,6 @@ class TicketModeratorController extends Controller
         ]);
     }
 
-
     /**
      * @param Request $request
      * @Route("/moderator/tickets/view/AwaitingToAnalise", name="moderator_ticket_view_awaiting_to_analise(", methods={"GET"})
@@ -80,7 +79,6 @@ class TicketModeratorController extends Controller
 
     }
 
-
     /**
      * @param $uuid
      * @return \Symfony\Component\HttpFoundation\Response
@@ -89,21 +87,17 @@ class TicketModeratorController extends Controller
      */
     public function viewAction($uuid)
     {
-        $form = $this->createForm(ModeratorTicketUpdateForm::class);
-
+        $form = $this->createForm(ModeratorTicketAnalise::class);
         $ticket = $this->get('sinepu.query.tickets')->getTicket($uuid);
-
         if ($form->isValid()) {
             $this->get('sinepu.handler.update_ticket')->handle($form->getData());
         }
-
         return $this->render('tickets/Moderator/View/ModeratorTicketAwaitingToAnalise.html.twig', [
             'ticket' => $ticket,
             'ticketUuid' => $uuid,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
 
     }
-
 
 }
