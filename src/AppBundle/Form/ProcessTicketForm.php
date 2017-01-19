@@ -6,23 +6,28 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Tickets\Application\Command\UpdateTicketCommand;
+use Tickets\Application\Command\ProcessTicketCommand;
 use Tickets\Domain\TicketEvent;
 
-class ModeratorTicketAnalise extends AbstractType
+class ProcessTicketForm extends AbstractType
 {
+    public function __construct()
+    {
+
+    }
+
     public function buildForm(FormBuilderInterface $formBuilder, array $option)
     {
         $formBuilder
             ->add('content', TextareaType::class, [
-                'label' => 'Komentaz'
-            ]);
+                'label' => 'Komentarz'
+            ])
+            ->setAction("");
         foreach ($this->getTicketStatusType() as $type) {
-            $formBuilder->add($type["id"], SubmitType::class,
-                [
-                    'label' => $type["key"],
-                    'attr' => $type["css"]
-                ]);
+            $formBuilder->add($type["id"], SubmitType::class, [
+                'label' => $type["key"],
+                'attr' => $type["css"],
+            ]);
         }
     }
 
@@ -30,32 +35,26 @@ class ModeratorTicketAnalise extends AbstractType
     {
         $types = [
             [
-                "key" => "Odrzuc",
+                "key" => "Odrzuć",
                 "value" => TicketEvent::TYPE_REJECTED,
-                'css' => ['class' => 'btn-warning btn-lg'],
+                'css' => ['class' => 'btn-warning btn-md'],
                 "id" => TicketEvent::TYPES[TicketEvent::TYPE_REJECTED]
             ],
             [
                 "key" => "Akceptuj",
                 "value" => TicketEvent::TYPE_AWAITING_FOR_ACCEPTATION,
-                'css' => ['class' => 'btn-success btn-lg'],
+                'css' => ['class' => 'btn-success btn-md'],
                 "id" => TicketEvent::TYPES[TicketEvent::TYPE_AWAITING_FOR_ACCEPTATION]
             ],
-            [
-                "key" => "Zamknij",
-                "value" => TicketEvent::TYPE_CLOSED,
-                'css' => ['class' => 'btn-danger btn-lg'],
-                "id" => TicketEvent::TYPES[TicketEvent::TYPE_CLOSED]
-            ],
         ];
-        return $types;
 
+        return $types;
     }
 
     public function configureOptions(OptionsResolver $optionsResolver)
     {
         $optionsResolver->setDefaults([
-            'data_class' => UpdateTicketCommand::class
+            'data_class' => ProcessTicketCommand::class
         ]);
     }
 }
