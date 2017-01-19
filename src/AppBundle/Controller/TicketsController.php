@@ -5,7 +5,7 @@ use AppBundle\Form\TicketType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Tickets\Application\Command\UpdateTicketCommand;
+use Tickets\Application\Command\ProcessTicketCommand;
 
 class TicketsController extends Controller
 {
@@ -55,29 +55,4 @@ class TicketsController extends Controller
             'ticketUuid' => $uuid
         ]);
     }
-
-    /**
-     * @param string $uuid
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @internal param Request $request
-     * @Route("/tickets/{uuid}/close", name="tickets_action_close", methods={"POST"})
-     */
-    public function closeAction(string $uuid)
-    {
-        $command = new UpdateTicketCommand();
-//        $command->content
-        $this->get("sinepu.handler.update_ticket")->closeTicket($command);
-    }
-
-    /**
-     * @param string $uuid
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @internal param Request $request
-     * @Route("/tickets/{uuid}/reject", name="tickets_action_reject", methods={"POST"})
-     */
-    public function rejectAction(string $uuid)
-    {
-
-    }
-
 }

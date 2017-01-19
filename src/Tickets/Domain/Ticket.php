@@ -40,7 +40,6 @@ class Ticket
      */
     private $status;
 
-
     /**
      * Ticket constructor.
      * @param UuidInterface $uuid
@@ -86,7 +85,6 @@ class Ticket
         $this->events[] = $ticketEvent;
     }
 
-
     /**
      * @return TicketEvent
      */
@@ -130,8 +128,12 @@ class Ticket
     {
         if ($who === 'student') {
             $this->events[] = new TicketEvent($this, TicketEvent::TYPE_ACCEPTED, $reason, $files);
+
+            $this->status = TicketEvent::TYPE_ACCEPTED;
         } else {
             $this->events[] = new TicketEvent($this, TicketEvent::TYPE_AWAITING_FOR_ACCEPTATION, $reason, $files);
+
+            $this->status = TicketEvent::TYPE_AWAITING_FOR_ACCEPTATION;
         }
     }
 
@@ -139,7 +141,6 @@ class Ticket
 //    {
 //        $this->events[] = new TicketEvent($this, TicketEvent::TYPE_REJECTED, $reason, $files);
 //    }
-
     /**
      * @param string $reason
      * @param array $files
@@ -149,7 +150,6 @@ class Ticket
         $this->events[] = new TicketEvent($this, TicketEvent::TYPE_CLOSED, $reason, $files);
         $this->status = TicketEvent::TYPE_CLOSED;
     }
-
 
     /**
      * @return string

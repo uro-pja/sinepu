@@ -1,91 +1,93 @@
 {% extends "base.html.twig" %}
 {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
 
+{% block page_title %}
+    Podanie <b>{{ ticket.type }}</b>
+    <small class="pull-right">
+        Status: <span class="label {{ ticket.statusBootstrap }}">{{ ticket.status }}</span>
+    </small>
+{% endblock %}
+
 {% block body %}
-    <h1>Podanie "{{ ticket.type }} " Status <span class="label {{ ticket.statusBootstrap }}">{{ ticket.status }}</span>
-    </h1>
-
-    <div class="table-responsive ">
-        <table class="table borderless">
-            <thead>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    Imie
-                </td>
-                <td>
-                    >imie<
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Nazwisko
-                </td>
-                <td>
-                    >nazwisko<
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Rok studiow
-                </td>
-                <td>
-                    >22222<
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Rok studiow
-                </td>
-                <td>
-                    22222
-                </td>
-            </tr>
-
-            {% for event in ticket.ticketEvent %}
-
-                <tr>
-                    <td>
-                        Autor
-                    </td>
-                    <td>
-                        not-implemented
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        Data odpowiedzi
-                    </td>
-                    <td>
-                        {{ event.createdAt | date }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Tresc
-
-                    <td>
-                        {{ event.content }}
-                    </td>
-                </tr>
-            {% endfor %}
-
-            </tbody>
-        </table>
-    </div>
-    <div class="col-md-12">
-
-        {{ form_start(form) }}
-        {{ form(form.content) }}
-        <div class="col-md-3"></div>
+    <div class="row">
         <div class="col-md-6">
+            <h3>Informacje:</h3>
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <td>
+                        Imie
+                    </td>
+                    <td>
+                        >imie<
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Nazwisko
+                    </td>
+                    <td>
+                        >nazwisko<
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Rok studiow
+                    </td>
+                    <td>
+                        >22222<
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Rok studiow
+                    </td>
+                    <td>
+                        22222
+                    </td>
+                </tr>
+
+                {% for event in ticket.ticketEvent %}
+
+                    <tr>
+                        <td>
+                            Autor
+                        </td>
+                        <td>
+                            not-implemented
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Data odpowiedzi
+                        </td>
+                        <td>
+                            {{ event.createdAt | date }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Tresc
+
+                        <td>
+                            {{ event.content }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h3>Historia akcji:</h3>
+        </div>
+        <div class="col-md-6">
+            <h3>Dostępne akcje:</h3>
+            {{ form_start(form, {'action': path("moderator_ticket_process",{"uuid":ticketUuid}), 'method': 'POST'}) }}
+            {{ form_row(form.content) }}
             {{ form_widget(form.awaiting_for_acceptation) }}
             {{ form_widget(form.rejected) }}
-            {{ form_widget(form.closed) }}
+            {{ form_end(form) }}
         </div>
-        <div class="col-md-6"></div>
-        {{ form_end(form) }}
     </div>
 {% endblock %}

@@ -1,6 +1,9 @@
 <?php
 namespace Tickets\Application\Command;
 
+use Ramsey\Uuid\Doctrine\UuidGenerator;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Tickets\Domain\Tickets;
 
 class UpdateTicketHandler
@@ -19,44 +22,43 @@ class UpdateTicketHandler
     }
 
     /**
-     * @param UpdateTicketCommand $command
+     * @param ProcessTicketCommand $command
      */
-    public function closeTicket(UpdateTicketCommand $command)
+    public function closeTicket(ProcessTicketCommand $command, String $UuidTicket)
     {
-        $ticket = $this->ticketsRepository->findOneByUuid($command->ticketUuid);
+        $ticket = $this->ticketsRepository->findOneByUuid(Uuid::fromString($command->ticketUuid));
         $ticket->close($command->content, $command->files);
         $this->ticketsRepository->update($ticket);
     }
 
     /**
-     * @param UpdateTicketCommand $command
+     * @param ProcessTicketCommand $command
      */
-    public function rejectTicket(UpdateTicketCommand $command)
+    public function rejectTicket(ProcessTicketCommand $command)
     {
-        $ticket = $this->ticketsRepository->findOneByUuid($command->ticketUuid);
-        $ticket->reject($command->content, $command->files);
+        $ticket = $this->ticketsRepository->findOneByUuid(Uuid::fromString($command->ticketUuid));
+        $ticket->reject($command->content, []);
         $this->ticketsRepository->update($ticket);
     }
 
     /**
-     * @param UpdateTicketCommand $command
+     * @param ProcessTicketCommand $command
      */
-    public function acceptTicket(UpdateTicketCommand $command)
+    public function acceptTicket(ProcessTicketCommand $command)
     {
-        $ticket = $this->ticketsRepository->findOneByUuid($command->ticketUuid);
-        $ticket->accept("manager", $command->content, $command->files);
+        $ticket = $this->ticketsRepository->findOneByUuid(Uuid::fromString($command->ticketUuid));
+        $ticket->accept("manager", $command->content, []);
         $this->ticketsRepository->update($ticket);
     }
 
     /**
-     * @param UpdateTicketCommand $command
+     * @param ProcessTicketCommand $command
      */
-    public function studentAcceptTicket(UpdateTicketCommand $command)
+    public function studentAcceptTicket(ProcessTicketCommand $command)
     {
-        $ticket = $this->ticketsRepository->findOneByUuid($command->ticketUuid);
-        $ticket->accept("student", $command->content, $command->files);
+        $ticket = $this->ticketsRepository->findOneByUuid(Uuid::fromString($command->ticketUuid));
+        $ticket->accept("student", $command->content, []);
         $this->ticketsRepository->update($ticket);
     }
-
 
 }
