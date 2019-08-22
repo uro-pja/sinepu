@@ -20,7 +20,7 @@ class CreateTicketTest extends FunctionalTestCase
         $ticketRepository = $this->container()->get('sinepu.repository.tickets');
         $params = [
             'ticket' => [
-                'content' => 'beniz',
+                'content' => 'first',
                 'type' => 'second'
             ]
         ];
@@ -33,7 +33,7 @@ class CreateTicketTest extends FunctionalTestCase
 
         $ticket = reset($tickets);
 
-        $this->assertEquals('beniz', $ticket->getContent());
+        $this->assertEquals('first', $ticket->getContent());
         $this->assertEquals('second', $ticket->getType());
     }
 
@@ -45,7 +45,7 @@ class CreateTicketTest extends FunctionalTestCase
         $params = [
             'ticket' => [
                 'content' => null,
-                'type' => 'penis'
+                'type' => 'first'
             ]
         ];
 
